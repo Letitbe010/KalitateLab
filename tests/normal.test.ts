@@ -15,7 +15,10 @@ describe('normal: solver A against reference values', () => {
     expect(upperTail(6) / 9.865876450376946e-10).toBeCloseTo(1, 10);
     expect(upperTail(4.5) / 3.3976731247300535e-6).toBeCloseTo(1, 10);
   });
-  it('erf/erfc continuity at the switch point x = 3', () => {
+  it('erf/erfc continuity at the switch points x = 2 (erfc) and x = 3 (erf)', () => {
+    // below x = 2 erfc = 1 − erf(series): absolute error ~1e-14, relative ~1e-11 at the switch
+    expect(Math.abs(erfc(2 - 1e-12) / erfc(2 + 1e-12) - 1)).toBeLessThan(2e-11);
+    expect(Math.abs(erf(3 - 1e-12) - erf(3 + 1e-12))).toBeLessThan(1e-15);
     expect(Math.abs(erfc(3 - 1e-12) - erfc(3 + 1e-12))).toBeLessThan(1e-15);
     expect(erf(0.5)).toBeCloseTo(0.5204998778130465, 15);
   });

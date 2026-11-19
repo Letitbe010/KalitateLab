@@ -2,7 +2,7 @@
  * Standard normal distribution (spec §3, §5.1, §5.2).
  *
  * Solver A: erf by its all-positive power series for |x| < 3 and erfc by its continued
- *           fraction for |x| ≥ 3 (accurate relative values in the far tail, for ppm).
+ *           fraction for x ≥ 2 (accurate relative values in the far tail, for ppm).
  * Solver B: adaptive Simpson integration of the density φ (independent of erf).
  * Spec requirement: |A − B| < 1e-10.
  */
@@ -24,7 +24,7 @@ function erfSeries(x: number): number {
   return (2 / SQRT_PI) * Math.exp(-x2) * sum;
 }
 
-/** erfc(x) for x ≥ 3: e^(−x²)/√π · 1/(x + ½/(x + 1/(x + (3/2)/(x + 2/(x + …))))). */
+/** erfc(x) for x ≥ 2 (switch point chosen so the tail is accurate to ~1e-14 relative; 1 − erf would lose digits): e^(−x²)/√π · 1/(x + ½/(x + 1/(x + (3/2)/(x + 2/(x + …))))). */
 function erfcContinuedFraction(x: number): number {
   let f = x;
   for (let k = 200; k >= 1; k--) f = x + k / 2 / f;
@@ -35,7 +35,7 @@ function erfcContinuedFraction(x: number): number {
 export function erfc(x: number): number {
   if (Number.isNaN(x)) return Number.NaN;
   if (x < 0) return 2 - erfc(-x);
-  if (x < 3) return 1 - erfSeries(x);
+  if (x < 2) return 1 - erfSeries(x);
   return erfcContinuedFraction(x);
 }
 
