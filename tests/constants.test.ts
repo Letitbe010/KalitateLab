@@ -12,7 +12,7 @@ const r = (x: number, k: number): number => Math.round(x * 10 ** k + 1e-9) / 10 
  * what the student uses; the difference (0.0005) is far inside the 0.2 % grading tolerance.
  */
 /** D₃/D₄ cells where the printed value is the exact value ± 0.001 (older tables). */
-const PRINTED_D_EXCEPTIONS = ['D4(3)', 'D4(18)', 'D3(19)', 'D4(19)', 'D3(22)', 'D4(22)', 'D3(24)'];
+const PRINTED_D_EXCEPTIONS: string[] = []; // D3/D4 use the exact values (user decision 2026-11-19)
 const D3_PRINTED_EXCEPTIONS: Record<number, string> = { 19: '0.734' };
 
 // Computing d₃ needs a 2-D integral; do it once per n for the whole file.

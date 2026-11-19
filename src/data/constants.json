@@ -1,5 +1,5 @@
 {
- "_source": "d2, d3, c4: SPC for Excel, 'Control Chart Constants' (https://www.spcforexcel.com/help/control-chart/constants, accessed 2026-11-19), rounded to 3 decimals (c4 to 4); n = 19 keeps the printed d3 = 0.734. A2, A3, B3, B4, D3, D4: the standard printed table (layout of Montgomery, Introduction to Statistical Quality Control, App. VI), transcribed and NOT yet checked against a printed copy: pending user verification. Every value is checked against first principles in tests/constants.test.ts (exact rounding, or within 0.001 for D3/D4, whose printed values differ by 0.001 in a few cells).",
+ "_source": "d2, d3, c4: SPC for Excel, 'Control Chart Constants' (https://www.spcforexcel.com/help/control-chart/constants, accessed 2026-11-19), rounded to 3 decimals (c4 to 4); n = 19 keeps the printed d3 = 0.734. A2, A3, B3, B4, D3, D4: the standard printed table (layout of Montgomery, Introduction to Statistical Quality Control, App. VI), transcribed and NOT yet checked against a printed copy: pending user verification. Every value is checked against first principles in tests/constants.test.ts (exact rounding). D3 and D4 are the exact first-principles values rounded to 3 decimals (user decision 2026-11-19), not the printed cells D4(3)=2.574, D4(18)=1.608, D3(19)=0.403, D4(19)=1.597, D3(22)=0.434, D4(22)=1.566, D3(24)=0.451.",
  "n": {
   "2": {
    "A2": "1.880",
@@ -18,7 +18,7 @@
    "B3": "0",
    "B4": "2.568",
    "D3": "0",
-   "D4": "2.574",
+   "D4": "2.575",
    "d2": "1.693",
    "d3": "0.888",
    "c4": "0.8862"
@@ -183,7 +183,7 @@
    "B3": "0.482",
    "B4": "1.518",
    "D3": "0.391",
-   "D4": "1.608",
+   "D4": "1.609",
    "d2": "3.640",
    "d3": "0.739",
    "c4": "0.9854"
@@ -193,8 +193,8 @@
    "A3": "0.698",
    "B3": "0.497",
    "B4": "1.503",
-   "D3": "0.403",
-   "D4": "1.597",
+   "D3": "0.404",
+   "D4": "1.596",
    "d2": "3.689",
    "d3": "0.734",
    "c4": "0.9862"
@@ -226,8 +226,8 @@
    "A3": "0.647",
    "B3": "0.534",
    "B4": "1.466",
-   "D3": "0.434",
-   "D4": "1.566",
+   "D3": "0.435",
+   "D4": "1.565",
    "d2": "3.819",
    "d3": "0.720",
    "c4": "0.9882"
@@ -248,7 +248,7 @@
    "A3": "0.619",
    "B3": "0.555",
    "B4": "1.445",
-   "D3": "0.451",
+   "D3": "0.452",
    "D4": "1.548",
    "d2": "3.895",
    "d3": "0.712",
