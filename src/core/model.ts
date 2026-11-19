@@ -59,8 +59,10 @@ export interface Ask {
   bound?: Decimal;
   side?: BoundSide;
   tails?: 'below' | 'above' | 'outside';
-  /** controlLimits: which chart. */
+  /** controlLimits / outOfControl: which chart. */
   chart?: 'xbar' | 'R' | 's' | ChartKind;
+  /** capable: the index the verdict is based on (default Cp, spec §3). */
+  index?: 'cp' | 'cpk';
 }
 
 export interface Rules {
