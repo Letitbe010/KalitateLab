@@ -1,0 +1,41 @@
+{
+  "_comment": "Golden cases from KalitateLab_argibideak.md §11.2. NEVER edit an expected value to match the implementation. Each expected value is checked to half a unit of its last given decimal. KQ2 total stored as the exact value 0.04306 % (spec writes ≈0.0431 %; decision approved by the user on 2026-11-19). All six cases were checked independently with Python's standard library (math.erf, statistics) before implementation.",
+  "cases": [
+    {
+      "id": "KQ1",
+      "kind": "capabilitySummary",
+      "input": { "lsl": "19,94", "usl": "20,06", "mu": "20,01", "sigma": "0,015" },
+      "expected": { "cp": "1.333", "cpu": "1.111", "cpl": "1.556", "cpk": "1.111", "centered": "USL" }
+    },
+    {
+      "id": "KQ2",
+      "kind": "populationDefects",
+      "input": { "lsl": "19,94", "usl": "20,06", "mu": "20,01", "sigma": "0,015" },
+      "expected": { "zU": "3.333", "zL": "-4.667", "pctAbove": "0.0429", "pctBelow": "0.000153", "pctTotal": "0.04306", "ppm": "430.6" }
+    },
+    {
+      "id": "KQ3",
+      "kind": "xbarRLimits",
+      "input": { "n": 5, "xbarbar": "50,00", "rbar": "0,10" },
+      "expected": { "uclX": "50.0577", "lclX": "49.9423", "uclR": "0.2114", "lclR": "0", "sigmaHat": "0.04299" }
+    },
+    {
+      "id": "KQ4",
+      "kind": "pLimits",
+      "input": { "pbar": "0,04", "n": 200 },
+      "expected": { "sigmaP": "0.013856", "ucl": "0.08157", "lclRaw": "-0.00157", "lcl": "0" }
+    },
+    {
+      "id": "KQ5",
+      "kind": "freqTable",
+      "input": { "classes": [["23,3", 2], ["23,4", 5], ["23,5", 10], ["23,6", 6], ["23,7", 2]] },
+      "expected": { "n": 25, "mean": "23.504", "sigma": "0.10385", "s": "0.10599" }
+    },
+    {
+      "id": "KQ6",
+      "kind": "pareto",
+      "input": { "items": [["A", "4500"], ["B", "2800"], ["C", "1600"], ["D", "1100"], ["E", "600"], ["F", "400"]], "threshold": 80, "rule": "crossing" },
+      "expected": { "total": "11000", "cumPct": ["40.91", "66.36", "80.91", "90.91", "96.36", "100.00"], "classA": ["A", "B", "C"] }
+    }
+  ]
+}
