@@ -4,8 +4,11 @@
  * common mistake (spec §8.3) and the first hypothesis that matches is reported.
  *
  * Tolerances (spec §8.1, visible in settings):
- *   x̄, s, σ̂: 0.1 % relative            Cp/Cpk/Cpu/Cpl: ±0.01           z: ±0.01
- *   % defective (population): 3 % relative or 0.01 percentage points
+ *   x̄ and the X̄ centre line (locations): half a unit of the data's last decimal + 1
+ *     (0.1 % of a value near 50 mm would be wider than the control band; user decision 2026-11-19)
+ *   s, σ̂, R̄, s̄, p̄…: 0.1 % relative   Cp/Cpk/Cpu/Cpl: ±0.01           z: ±0.01
+ *   % defective (population): 3 % relative only (the spec's extra "0.01 percentage points" made
+ *     small % ±20 % wide; dropped by user decision 2026-11-19)
  *   % in the sample: exact count, 0.1 % relative or 0.01 percentage points (user rounding)
  *   control limits: UCL and LCL within 0.2 % of their DISTANCE TO THE CENTRE LINE
  *     (the 3-decimal constants only affect the A₂R̄, D₄R̄… term; 0.2 % of an X̄ limit's value
@@ -35,6 +38,8 @@ import {
 
 export interface Tolerances {
   meanSdRel: number;
+  /** location tolerance = this × 10^−(data decimals + 1) */
+  locationResolution: number;
   indexAbs: number;
   zAbs: number;
   popPctRel: number;
@@ -47,10 +52,11 @@ export interface Tolerances {
 
 export const DEFAULT_TOLERANCES: Tolerances = {
   meanSdRel: 0.001,
+  locationResolution: 0.5,
   indexAbs: 0.01,
   zAbs: 0.01,
   popPctRel: 0.03,
-  popPctAbs: 0.01,
+  popPctAbs: 0,
   samplePctRel: 0.001,
   samplePctAbs: 0.01,
   limitsRelToBand: 0.002,
@@ -185,6 +191,7 @@ function numberTol(ask: Ask, ex: Exercise, T: Tolerances): NumTol {
   const dmin = dataDecimals(ex.dataset) + 1;
   switch (ask.type) {
     case 'mean':
+      return { abs: T.locationResolution * 10 ** -dmin, minDecimals: dmin };
     case 'sd':
     case 'sigmaHat':
       return { rel: T.meanSdRel, minDecimals: dmin };
@@ -428,11 +435,13 @@ function gradeLimits(ex: Exercise, ask: Ask, exp: LimitsExpected, ans: Answer | 
     if (u === null) return { part, status: 'invalid' as const, expected: e, given: ans?.[part] };
     const t: NumTol =
       part === 'cl'
-        ? { rel: T.meanSdRel, minDecimals: dmin }
+        ? variables && ask.chart === 'xbar'
+          ? { abs: T.locationResolution * 10 ** -dmin!, minDecimals: dmin }
+          : { rel: T.meanSdRel, minDecimals: dmin }
         : { rel: T.limitsRelToBand, ref: exp.cl, minDecimals: dmin };
     if (within(u, e, t, parsed.decimals)) return { part, status: 'correct' as const, expected: e, given: u };
     // the hypotheses for UCL/LCL are judged with a tolerance on the band width
-    const diagnosis = firstMatch(u, limitsHypotheses(ex, ask, part, exp), [e], { ...t, ref: exp.cl, rel: part === 'cl' ? T.meanSdRel : T.limitsRelToBand }, parsed.decimals);
+    const diagnosis = firstMatch(u, limitsHypotheses(ex, ask, part, exp), [e], t, parsed.decimals);
     return { part, status: 'wrong' as const, expected: e, given: u, diagnosis };
   });
 }

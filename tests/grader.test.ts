@@ -183,8 +183,18 @@ describe('grader: tolerances and input handling (spec §8.1)', () => {
     expect(ok(kq1, 'pct', { value: '0,0436' })).toBe(true);
     expect(ok(kq1, 'pct', { value: '431', unit: 'ppm' })).toBe(true);
     expect(ok(kq1, 'pct', { value: '0,000431', unit: 'fraction' })).toBe(true);
-    // spec §8.1: OR 0,01 percentage points absolute (lenient for very small %; reported to the user)
-    expect(ok(kq1, 'pct', { value: '0,06' })).toBe(false);
+    // 3 % relative only (user decision 2026-11-19): 0,05 % is 16 % off
+    expect(ok(kq1, 'pct', { value: '0,05' })).toBe(false);
+    expect(ok(kq1, 'pct', { value: '0,0443' })).toBe(true); // 2,9 % off
+  });
+  it('locations (x̄, X̄ centre line): half a unit of the data decimals + 1', () => {
+    // KQ5: 1-decimal data → ±0,005
+    expect(ok(euskadi, 'a1', { value: '23,508' })).toBe(true);
+    expect(ok(euskadi, 'a1', { value: '23,51' })).toBe(false);
+    const L = solveExercise(xr).lx as Extract<Expected, { kind: 'limits' }>;
+    // 3-decimal data → CL ±0,0005 (the old 0,1 % would have accepted ±0,04 mm)
+    const r = grade(xr, { lx: { cl: fmt(L.cl + 0.002), ucl: fmt(L.ucl), lcl: fmt(L.lcl) } }).asks[0]!;
+    expect(r.items[0]!.status).toBe('wrong');
   });
   it('lengths in µm are converted', () => {
     const r = grade(euskadi, { a2: { value: '106,0', unit: 'µm' } });
