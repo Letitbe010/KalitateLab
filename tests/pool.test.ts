@@ -38,7 +38,8 @@ describe('pool', () => {
     const v = verifyExercise(e);
     expect(v.reasons).toEqual([]);
     expect(grade(e, perfectAnswers(e)).score10).toBeCloseTo(10, 12);
-    expect(e.review).toBe('review-needed'); // until the user approves (spec §9.3)
+    // OPE entries approved by the user (2026-11-20); generated ones wait for review (spec §9.3)
+    expect(e.review).toBe(e.origin === 'ope' ? 'approved' : 'review-needed');
   });
 
   it('pinned generated exercises rebuild from their stored seed', () => {

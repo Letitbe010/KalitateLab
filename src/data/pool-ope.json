@@ -2,8 +2,8 @@
  {
   "id": "ope-euskadi-2020-7",
   "origin": "ope",
-  "review": "review-needed",
-  "sourceNote": "Euskadi OPE 2020, 1508, 7. ariketa (Estatistika), 0,2 + 0,3 + 0,5 puntu. Enuntziatuak ez du esaten desbiderapena n ala n − 1 den: biak onartzen dira. b) «23,3 mm baino gutxiago» literalki < 23,3 gisa modelatuta (laginean 0 %); ≤ 23,3 (8 %) izan daiteke asmoa: erabiltzaileak erabaki behar du.",
+  "review": "approved",
+  "sourceNote": "Euskadi OPE 2020, 1508, 7. ariketa (Estatistika), 0,2 + 0,3 + 0,5 puntu. Enuntziatuak ez du esaten desbiderapena n ala n − 1 den: biak onartzen dira. b) «23,3 mm baino gutxiago» = < 23,3 (laginean 0 %); interpretazioa erabiltzaileak berretsia (2026-11-20).",
   "sourceUrl": "https://www.euskadi.eus/contenidos/informacion/langile_d_ope_sec_fp_2020_azte/es_def/adjuntos/secundaria/Organizacion_y_proyectos_de_fabricacion_mecanica_cast.pdf",
   "difficulty": 1,
   "dataset": {
@@ -75,7 +75,7 @@
  {
   "id": "ope-madrid-2025-3",
   "origin": "ope",
-  "review": "review-needed",
+  "review": "approved",
   "sourceNote": "Madril OPE 2025, 590112, 3. ariketa (0,5 puntu). 40p6 = 40,026 – 40,042 mm (enuntziatuak dakar). Datuak µm-tan 40 mm-rekiko, mm-ra pasatuta. Enuntziatuak ez du σ̂-ren metodoa esaten: R̄/d₂ eta datu guztien s onartzen dira.",
   "sourceUrl": "https://www.comunidad.madrid/docs/assets/2025/06/21/rh03_257_2025_exam_590112.pdf",
   "difficulty": 2,
@@ -197,7 +197,7 @@
  {
   "id": "ope-madrid-2025-10",
   "origin": "ope",
-  "review": "review-needed",
+  "review": "approved",
   "sourceNote": "Madril OPE 2025, 590112, 10. ariketa (0,75 puntu). A klasearen muga enuntziatuan ez dago: % 80, gurutzatzen duen kausa barne (konbentzioa).",
   "sourceUrl": "https://www.comunidad.madrid/docs/assets/2025/06/21/rh03_257_2025_exam_590112.pdf",
   "difficulty": 1,
@@ -252,8 +252,8 @@
  {
   "id": "ope-madrid-2022-3",
   "origin": "ope",
-  "review": "review-needed",
-  "sourceNote": "Madril OPE 2022, 590112, 3. ariketa (1 puntu); spec-ak «Madril 2023 berrezarpena» deitzen dio. B zilindroa: d = 20e7 (planoan) → 19,939 – 19,960 mm. Mugak ISO 286 taulatik (memoriatik), erabiltzaileak egiaztatzeko. 3.3 galdera («zergatik?») zentratzearen galdera gisa modelatuta.",
+  "review": "approved",
+  "sourceNote": "Madril OPE 2022, 590112, 3. ariketa (1 puntu); spec-ak «Madril 2023 berrezarpena» deitzen dio. B zilindroa: d = 20e7 (planoan) → 19,939 – 19,960 mm (ISO 286; erabiltzaileak egiaztatua, 2026-11-20). 3.3 galdera («zergatik?») zentratzearen galdera gisa modelatuta (erabiltzaileak onartua).",
   "sourceUrl": "https://www.comunidad.madrid/docs/assets/2023/06/26/rh03_257_2023_exam_r_590112.pdf",
   "difficulty": 1,
   "dataset": {
@@ -310,8 +310,8 @@
  {
   "id": "ope-valencia-2025-a3b",
   "origin": "ope",
-  "review": "review-needed",
-  "sourceNote": "Valentzia OPE 2025, 224, A.3 b (4 puntuko ariketaren zatia). Zuloa Ø30H8 → 30,000 – 30,033 mm. Mugak ISO 286 taulatik (memoriatik), erabiltzaileak egiaztatzeko. s laginarena da (n = 100).",
+  "review": "approved",
+  "sourceNote": "Valentzia OPE 2025, 224, A.3 b (4 puntuko ariketaren zatia). Zuloa Ø30H8 → 30,000 – 30,033 mm (ISO 286; erabiltzaileak egiaztatua, 2026-11-20). s laginarena da (n = 100).",
   "sourceUrl": "https://ceice.gva.es/documents/162909733/396220826/224.pdf",
   "difficulty": 2,
   "dataset": {
@@ -368,8 +368,8 @@
  {
   "id": "ope-castillayleon-2020-6",
   "origin": "ope",
-  "review": "review-needed",
-  "sourceNote": "Gaztela eta Leon, EDU/255/2020 agindua, 112 espezialitatea, 1. ariketaren eredua, 6. galdera. Ø31h8 → 30,961 – 31,000 mm. Mugak ISO 286 taulatik (memoriatik), erabiltzaileak egiaztatzeko. «Zenbat pieza akastun laginean» → % × 1000 ≈ 159 pieza (% gisa zuzentzen da).",
+  "review": "approved",
+  "sourceNote": "Gaztela eta Leon, EDU/255/2020 agindua, 112 espezialitatea, 1. ariketaren eredua, 6. galdera. Ø31h8 → 30,961 – 31,000 mm (ISO 286; erabiltzaileak egiaztatua, 2026-11-20). «Zenbat pieza akastun laginean» → % × 1000 ≈ 159 pieza (% gisa zuzentzen da).",
   "difficulty": 2,
   "dataset": {
    "kind": "summary",
