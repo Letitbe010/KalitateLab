@@ -323,7 +323,7 @@ function numberHypotheses(ex: Exercise, ask: Ask, exp: NumberExpected): Hyp[] {
         }
       }
       // σ̂ = R̄ (not divided by d₂)
-      if (ex.rules.sigmaHat === 'Rbar/d2' && ds.kind === 'subgroups') {
+      if ((ex.rules.sigmaHat === 'Rbar/d2' || ex.rules.sigmaHat === 'either') && ds.kind === 'subgroups') {
         const rbar = D.toNumber(D.div(D.sum(ds.groups.map(rangeOfGroup)), D.q(ds.groups.length)));
         const v = capabilityValue(ex, ask, rbar);
         if (v !== undefined) hyps.push({ id: 'rbar-not-divided', value: v });
@@ -334,7 +334,7 @@ function numberHypotheses(ex: Exercise, ask: Ask, exp: NumberExpected): Hyp[] {
       if (ds.kind !== 'subgroups') break;
       const n = ds.groups[0]!.length;
       const rbar = D.div(D.sum(ds.groups.map(rangeOfGroup)), D.q(ds.groups.length));
-      if ((ex.rules.sigmaHat ?? 's') === 'Rbar/d2') {
+      if (ex.rules.sigmaHat === 'Rbar/d2' || ex.rules.sigmaHat === 'either') {
         hyps.push({ id: 'rbar-not-divided', value: D.toNumber(rbar) });
         for (const m of [n - 1, n + 1]) if (m >= 2 && m <= 25) hyps.push({ id: 'wrong-n-constant', value: D.toNumber(D.div(rbar, constants(m).d2)) });
         hyps.push({ id: 'overall-s-for-within', value: describeDs(ds).s });
@@ -586,3 +586,42 @@ export function grade(ex: Exercise, answers: Record<string, Answer>, T: Toleranc
 
 /** Re-exported for the UI (verdict helper with the exercise thresholds). */
 export { capableVerdict };
+
+/**
+ * Mistakes whose result, when it falls inside the tolerance, is an acceptable answer anyway
+ * (the neglected tail or the frequency weighting changes the result by less than the tolerance).
+ */
+const MINOR: ReadonlySet<DiagnosisId> = new Set<DiagnosisId>(['one-tail-only', 'freq-ignored']);
+
+/** The mistake gives exactly the correct result here (e.g. D₃ = 0 for n and n ± 1): it is irrelevant, not hidden. */
+const identical = (a: number, b: number): boolean => Math.abs(a - b) <= 1e-12 * Math.max(1, Math.abs(b));
+
+/**
+ * Spec §10.3 filter: every common mistake must give a result outside the tolerance of the
+ * correct answer, so the diagnosis can work. Returns "askId:part:diagnosis" for each mistake
+ * that cannot be told apart (empty = the exercise is usable). Exceptions: a mistake that gives
+ * exactly the correct value, and the MINOR mistakes above.
+ */
+export function indistinguishable(ex: Exercise, T: Tolerances = DEFAULT_TOLERANCES): string[] {
+  const bad: string[] = [];
+  for (const ask of ex.asks) {
+    const exp = solveAsk(ex, ask);
+    if (exp.kind === 'number') {
+      const t = numberTol(ask, ex, T);
+      for (const h of numberHypotheses(ex, ask, exp)) {
+        if (!Number.isFinite(h.value) || MINOR.has(h.id) || exp.accepted.some((a) => identical(h.value, a.value))) continue;
+        if (exp.accepted.some((a) => within(h.value, a.value, t, null))) bad.push(`${ask.id}:value:${h.id}`);
+      }
+    } else if (exp.kind === 'limits') {
+      const dmin = ex.dataset.kind === 'subgroups' ? dataDecimals(ex.dataset) + 1 : undefined;
+      for (const part of ['cl', 'ucl', 'lcl'] as const) {
+        const t: NumTol = part === 'cl' ? { rel: T.meanSdRel, minDecimals: dmin } : { rel: T.limitsRelToBand, ref: exp.cl, minDecimals: dmin };
+        for (const h of limitsHypotheses(ex, ask, part, exp)) {
+          if (identical(h.value, exp[part])) continue;
+          if (within(h.value, exp[part], t, null)) bad.push(`${ask.id}:${part}:${h.id}`);
+        }
+      }
+    }
+  }
+  return bad;
+}

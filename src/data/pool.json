@@ -1,0 +1,1012 @@
+[
+ {
+  "id": "ope-euskadi-2020-7",
+  "origin": "ope",
+  "sourceNote": "Euskadi OPE 2020, 1508, 7. ariketa (Estatistika), 0,2 + 0,3 + 0,5 puntu. Enuntziatuak ez du esaten desbiderapena n ala n − 1 den: biak onartzen dira. b) «23,3 mm baino gutxiago» literalki < 23,3 gisa modelatuta (laginean 0 %); ≤ 23,3 (8 %) izan daiteke asmoa: erabiltzaileak erabaki behar du.",
+  "sourceUrl": "https://www.euskadi.eus/contenidos/informacion/langile_d_ope_sec_fp_2020_azte/es_def/adjuntos/secundaria/Organizacion_y_proyectos_de_fabricacion_mecanica_cast.pdf",
+  "review": "review-needed",
+  "difficulty": 1,
+  "dataset": {
+   "kind": "freq",
+   "unit": "mm",
+   "classes": [
+    {
+     "x": "23.3",
+     "f": 2
+    },
+    {
+     "x": "23.4",
+     "f": 6
+    },
+    {
+     "x": "23.5",
+     "f": 8
+    },
+    {
+     "x": "23.6",
+     "f": 7
+    },
+    {
+     "x": "23.7",
+     "f": 2
+    }
+   ]
+  },
+  "spec": {
+   "lsl": "23.3",
+   "usl": "23.7",
+   "nominal": "23.5"
+  },
+  "rules": {
+   "sd": "either"
+  },
+  "asks": [
+   {
+    "id": "a1",
+    "type": "mean"
+   },
+   {
+    "id": "a2",
+    "type": "sd"
+   },
+   {
+    "id": "b",
+    "type": "pctSample",
+    "bound": "23.3",
+    "side": "lt"
+   },
+   {
+    "id": "c",
+    "type": "pctPopulation",
+    "tails": "outside"
+   }
+  ],
+  "weights": {
+   "a1": 0.1,
+   "a2": 0.1,
+   "b": 0.3,
+   "c": 0.5
+  },
+  "text": {
+   "eu": "23,5 ± 0,2 mm-ko luzera duen ardatz-populazio batetik 25 elementuko lagin adierazgarri batean ardatzen luzera neurtu da (taula). a) Kalkulatu batez bestekoa eta desbiderapen estandarra. b) 23,3 mm baino gutxiago neurtzen duten piezen ehunekoa (laginean). c) Lagina adierazgarria dela onartuta, txartzat emango genituzkeen piezen ehunekoa (populazioan, banaketa normala).",
+   "es": "De una población de ejes de longitud 23,5 ± 0,2 mm se ha medido la longitud en una muestra representativa de 25 elementos (tabla). a) Calcula la media y la desviación típica. b) Porcentaje de piezas que miden menos de 23,3 mm (en la muestra). c) Suponiendo la muestra representativa, porcentaje de piezas que consideraríamos defectuosas (en la población, distribución normal)."
+  }
+ },
+ {
+  "id": "ope-madrid-2025-3",
+  "origin": "ope",
+  "sourceNote": "Madril OPE 2025, 590112, 3. ariketa (0,5 puntu). 40p6 = 40,026 – 40,042 mm (enuntziatuak dakar). Datuak µm-tan 40 mm-rekiko, mm-ra pasatuta. Enuntziatuak ez du σ̂-ren metodoa esaten: R̄/d₂ eta datu guztien s onartzen dira.",
+  "sourceUrl": "https://www.comunidad.madrid/docs/assets/2025/06/21/rh03_257_2025_exam_590112.pdf",
+  "review": "review-needed",
+  "difficulty": 2,
+  "dataset": {
+   "kind": "subgroups",
+   "unit": "mm",
+   "groups": [
+    [
+     "40.035",
+     "40.04",
+     "40.035",
+     "40.035",
+     "40.055"
+    ],
+    [
+     "40.045",
+     "40.055",
+     "40.045",
+     "40.035",
+     "40.035"
+    ],
+    [
+     "40.045",
+     "40.035",
+     "40.035",
+     "40.04",
+     "40.041"
+    ],
+    [
+     "40.03",
+     "40.04",
+     "40.035",
+     "40.041",
+     "40.035"
+    ],
+    [
+     "40.04",
+     "40.041",
+     "40.045",
+     "40.045",
+     "40.045"
+    ],
+    [
+     "40.03",
+     "40.045",
+     "40.035",
+     "40.045",
+     "40.04"
+    ],
+    [
+     "40.027",
+     "40.045",
+     "40.035",
+     "40.045",
+     "40.04"
+    ],
+    [
+     "40.03",
+     "40.04",
+     "40.045",
+     "40.045",
+     "40.045"
+    ],
+    [
+     "40.035",
+     "40.045",
+     "40.045",
+     "40.045",
+     "40.042"
+    ],
+    [
+     "40.03",
+     "40.04",
+     "40.03",
+     "40.045",
+     "40.035"
+    ]
+   ]
+  },
+  "spec": {
+   "lsl": "40.026",
+   "usl": "40.042",
+   "nominal": "40",
+   "designation": "40p6"
+  },
+  "rules": {
+   "sd": "s",
+   "sigmaHat": "either",
+   "capableThresholds": [
+    1,
+    1.33
+   ]
+  },
+  "asks": [
+   {
+    "id": "cp",
+    "type": "cp"
+   },
+   {
+    "id": "cpk",
+    "type": "cpk"
+   },
+   {
+    "id": "cap",
+    "type": "capable",
+    "index": "cpk"
+   }
+  ],
+  "weights": {
+   "cp": 0.2,
+   "cpk": 0.2,
+   "cap": 0.1
+  },
+  "text": {
+   "eu": "Buxaren fabrikazioan 40p6 kota (40,026 – 40,042 mm) kontrolatzen da. Ordubeteko tartearekin 10 azpitalde jarraitu hartu dira, bakoitza kanpo-diametroaren 5 neurketakoa (taula, mm-tan). Egin prozesuaren gaitasun-azterketa: kalkulatu Cp eta Cpk, eta erabaki prozesuak espezifikazioak betetzen dituen.",
+   "es": "En la fabricación del buje se controla la cota 40p6 (40,026 – 40,042 mm). Se han tomado 10 subgrupos consecutivos, con un intervalo de 1 hora, de 5 medidas del diámetro exterior (tabla, en mm). Realiza un estudio de capacidad del proceso: calcula Cp y Cpk y concluye si el proceso cumple las especificaciones."
+  }
+ },
+ {
+  "id": "ope-madrid-2025-10",
+  "origin": "ope",
+  "sourceNote": "Madril OPE 2025, 590112, 10. ariketa (0,75 puntu). A klasearen muga enuntziatuan ez dago: % 80, gurutzatzen duen kausa barne (konbentzioa).",
+  "sourceUrl": "https://www.comunidad.madrid/docs/assets/2025/06/21/rh03_257_2025_exam_590112.pdf",
+  "review": "review-needed",
+  "difficulty": 1,
+  "dataset": {
+   "kind": "pareto",
+   "items": [
+    {
+     "label": "A",
+     "value": "1800"
+    },
+    {
+     "label": "B",
+     "value": "3200"
+    },
+    {
+     "label": "C",
+     "value": "1200"
+    },
+    {
+     "label": "D",
+     "value": "2500"
+    },
+    {
+     "label": "E",
+     "value": "900"
+    },
+    {
+     "label": "F",
+     "value": "1400"
+    }
+   ]
+  },
+  "rules": {
+   "sd": "s",
+   "paretoThreshold": 80,
+   "paretoRule": "crossing"
+  },
+  "asks": [
+   {
+    "id": "pa",
+    "type": "pareto"
+   }
+  ],
+  "weights": {
+   "pa": 0.75
+  },
+  "text": {
+   "eu": "Fabrikazio-prozesuan diru-galerak antzeman dira, eta kausak kostuaren arabera kuantifikatu dira (€): A erremintaren doikuntza okerra; B programatu gabeko geldialdiak; C ertzaren higadura; D erreminta-aldaketaren denbora; E ebaketa akastunengatiko berrlanak; F isuri hidraulikoak. Egin Pareto diagrama: ordenatu kausak, kalkulatu ehuneko metatua eta adierazi A klaseko kausak (% 80).",
+   "es": "Durante el proceso de fabricación se han detectado pérdidas monetarias, cuantificadas por causa según su coste (€): A ajuste incorrecto de la herramienta; B paradas no programadas; C desgaste de filo de herramienta; D tiempo de cambio de herramienta; E retrabajo por cortes defectuosos; F fugas hidráulicas. Construye el diagrama de Pareto: ordena las causas, calcula el porcentaje acumulado e indica las causas de clase A (80 %)."
+  }
+ },
+ {
+  "id": "ope-madrid-2022-3",
+  "origin": "ope",
+  "sourceNote": "Madril OPE 2022, 590112, 3. ariketa (1 puntu); spec-ak «Madril 2023 berrezarpena» deitzen dio. B zilindroa: d = 20e7 (planoan) → 19,939 – 19,960 mm. Mugak ISO 286 taulatik (memoriatik), erabiltzaileak egiaztatzeko. 3.3 galdera («zergatik?») zentratzearen galdera gisa modelatuta.",
+  "sourceUrl": "https://www.comunidad.madrid/docs/assets/2023/06/26/rh03_257_2023_exam_r_590112.pdf",
+  "review": "review-needed",
+  "difficulty": 1,
+  "dataset": {
+   "kind": "summary",
+   "unit": "mm",
+   "mean": "19.953",
+   "sd": "0.004",
+   "sdKind": "sigma"
+  },
+  "spec": {
+   "lsl": "19.939",
+   "usl": "19.96",
+   "nominal": "20",
+   "designation": "20e7"
+  },
+  "rules": {
+   "sd": "sigma",
+   "capableThresholds": [
+    1,
+    1.33
+   ]
+  },
+  "asks": [
+   {
+    "id": "pct",
+    "type": "pctPopulation",
+    "tails": "outside"
+   },
+   {
+    "id": "cp",
+    "type": "cp"
+   },
+   {
+    "id": "cap",
+    "type": "capable",
+    "index": "cp"
+   },
+   {
+    "id": "cen",
+    "type": "centered"
+   }
+  ],
+  "weights": {
+   "pct": 0.4,
+   "cp": 0.15,
+   "cap": 0.15,
+   "cen": 0.3
+  },
+  "text": {
+   "eu": "Piezen errefusak B gorputz zilindrikoagatik dira (Ø20e7: 19,939 – 19,960 mm). Lagin adierazgarri batean diametroaren batez bestekoa 19,953 mm da (σ = 0,004 mm); banaketa normala onartzen da. 3.1) Kalkulatu pieza akastunen ehunekoa. 3.2) Aztertu fabrikaziorako ekipoa egokia den (Cp). 3.3) Zeri zor zaio emaitza? (zentratuta dagoen eta zein aldetara desplazatuta).",
+   "es": "Los rechazos de piezas se deben al cuerpo cilíndrico B (Ø20e7: 19,939 – 19,960 mm). En una muestra representativa el diámetro medio es 19,953 mm (σ = 0,004 mm); se supone distribución normal. 3.1) Calcula el porcentaje de piezas defectuosas. 3.2) Analiza si el equipo empleado es el adecuado (Cp). 3.3) ¿A qué se debe el resultado? (si está centrado y hacia qué lado está desplazado)."
+  }
+ },
+ {
+  "id": "ope-valencia-2025-a3b",
+  "origin": "ope",
+  "sourceNote": "Valentzia OPE 2025, 224, A.3 b (4 puntuko ariketaren zatia). Zuloa Ø30H8 → 30,000 – 30,033 mm. Mugak ISO 286 taulatik (memoriatik), erabiltzaileak egiaztatzeko. s laginarena da (n = 100).",
+  "sourceUrl": "https://ceice.gva.es/documents/162909733/396220826/224.pdf",
+  "review": "review-needed",
+  "difficulty": 2,
+  "dataset": {
+   "kind": "summary",
+   "unit": "mm",
+   "mean": "30.01",
+   "sd": "0.0065",
+   "sdKind": "s",
+   "n": 100
+  },
+  "spec": {
+   "lsl": "30",
+   "usl": "30.033",
+   "nominal": "30",
+   "designation": "30H8"
+  },
+  "rules": {
+   "sd": "s",
+   "capableThresholds": [
+    1,
+    1.33
+   ]
+  },
+  "asks": [
+   {
+    "id": "cp",
+    "type": "cp"
+   },
+   {
+    "id": "cpk",
+    "type": "cpk"
+   },
+   {
+    "id": "cen",
+    "type": "centered"
+   },
+   {
+    "id": "cap",
+    "type": "capable",
+    "index": "cpk"
+   }
+  ],
+  "weights": {
+   "cp": 3,
+   "cpk": 3,
+   "cen": 2,
+   "cap": 2
+  },
+  "text": {
+   "eu": "Errodamenduen fabrikazioan barne-diametroa kota kritikoa da. Doikuntza H8/n9 da (zuloa Ø30H8: 30,000 – 30,033 mm). n = 100 laginean: x̄ = 30,01 mm, s = 0,0065 mm. Egin prozesuaren gaitasun-azterketa: Cp, Cpk, zentratzea eta ondorioa.",
+   "es": "En la fabricación de los rodamientos el diámetro interior es cota crítica. El ajuste es H8/n9 (agujero Ø30H8: 30,000 – 30,033 mm). En una muestra de n = 100: x̄ = 30,01 mm, s = 0,0065 mm. Realiza el estudio de capacidad del proceso: Cp, Cpk, centrado y conclusión."
+  }
+ },
+ {
+  "id": "ope-castillayleon-2020-6",
+  "origin": "ope",
+  "sourceNote": "Gaztela eta Leon, EDU/255/2020 agindua, 112 espezialitatea, 1. ariketaren eredua, 6. galdera. Ø31h8 → 30,961 – 31,000 mm. Mugak ISO 286 taulatik (memoriatik), erabiltzaileak egiaztatzeko. «Zenbat pieza akastun laginean» → % × 1000 ≈ 159 pieza (% gisa zuzentzen da).",
+  "review": "review-needed",
+  "difficulty": 2,
+  "dataset": {
+   "kind": "summary",
+   "unit": "mm",
+   "mean": "30.9935",
+   "sd": "0.0065",
+   "sdKind": "s",
+   "n": 1000
+  },
+  "spec": {
+   "lsl": "30.961",
+   "usl": "31",
+   "nominal": "31",
+   "designation": "31h8"
+  },
+  "rules": {
+   "sd": "s"
+  },
+  "asks": [
+   {
+    "id": "cp",
+    "type": "cp"
+   },
+   {
+    "id": "cpk",
+    "type": "cpk"
+   },
+   {
+    "id": "pct",
+    "type": "pctPopulation",
+    "tails": "outside"
+   }
+  ],
+  "weights": {
+   "cp": 3,
+   "cpk": 3,
+   "pct": 4
+  },
+  "text": {
+   "eu": "Ardatza seriean ekoizten da; 1000 unitateko lagin bat hartu da. Plater ildaskatua doan muturraren espezifikazioa Ø31h8 da (30,961 – 31,000 mm). Emaitzak: batez bestekoa 30,9935 mm eta desbiderapena 0,0065 mm. Kalkulatu prozesuaren gaitasuna (Cp, Cpk) eta pieza akastunen ehunekoa (laginean zenbat pieza diren ere esan daiteke: % × 1000).",
+   "es": "El árbol se produce en serie y se toma una muestra de 1000 unidades. La especificación del extremo donde se aloja el plato ranurado es Ø31h8 (30,961 – 31,000 mm). Resultados: media 30,9935 mm y desviación 0,0065 mm. Calcula la capacidad del proceso (Cp, Cpk) y el porcentaje de piezas defectuosas (se puede indicar también cuántas en la muestra: % × 1000)."
+  }
+ },
+ {
+  "id": "freqTable-1-1",
+  "origin": "generated",
+  "seed": 1,
+  "review": "review-needed",
+  "difficulty": 1,
+  "dataset": {
+   "kind": "freq",
+   "unit": "mm",
+   "classes": [
+    {
+     "x": "34.8",
+     "f": 1
+    },
+    {
+     "x": "34.9",
+     "f": 6
+    },
+    {
+     "x": "35",
+     "f": 9
+    },
+    {
+     "x": "35.1",
+     "f": 9
+    }
+   ]
+  },
+  "spec": {
+   "lsl": "34.8",
+   "usl": "35.2",
+   "nominal": "35"
+  },
+  "rules": {
+   "sd": "either"
+  },
+  "asks": [
+   {
+    "id": "a1",
+    "type": "mean"
+   },
+   {
+    "id": "a2",
+    "type": "sd"
+   },
+   {
+    "id": "b",
+    "type": "pctSample",
+    "bound": "34.9",
+    "side": "lt"
+   },
+   {
+    "id": "c",
+    "type": "pctPopulation",
+    "tails": "outside"
+   }
+  ],
+  "weights": {
+   "a1": 1,
+   "a2": 1,
+   "b": 3,
+   "c": 5
+  },
+  "text": {
+   "eu": "35 ± 0,2 mm-ko luzera duen ardatz-populazio batetik 25 elementuko lagin adierazgarri bat neurtu da (taula). a) Kalkulatu batez bestekoa eta desbiderapen estandarra. b) Laginean, zer pieza-ehunekok du 34,9 mm baino txikiagoa luzera? c) Lagina adierazgarria eta banaketa normala direla onartuta, estimatu populazioko pieza akastunen ehunekoa (tolerantziatik kanpo).",
+   "es": "De una población de ejes de longitud 35 ± 0,2 mm se ha medido una muestra representativa de 25 elementos (tabla). a) Calcula la media y la desviación típica. b) En la muestra, ¿qué porcentaje de piezas tiene una longitud menor que 34,9 mm? c) Suponiendo la muestra representativa y distribución normal, estima el porcentaje de piezas defectuosas en la población (fuera de tolerancia)."
+  }
+ },
+ {
+  "id": "defectsSummary-1-1",
+  "origin": "generated",
+  "seed": 1,
+  "review": "review-needed",
+  "difficulty": 1,
+  "dataset": {
+   "kind": "summary",
+   "unit": "mm",
+   "mean": "35.002",
+   "sd": "0.004",
+   "sdKind": "s",
+   "n": 125
+  },
+  "spec": {
+   "lsl": "34.99",
+   "usl": "35.01",
+   "nominal": "35"
+  },
+  "rules": {
+   "sd": "s"
+  },
+  "asks": [
+   {
+    "id": "z",
+    "type": "z",
+    "bound": "35.01"
+   },
+   {
+    "id": "p",
+    "type": "pctPopulation",
+    "tails": "outside"
+   }
+  ],
+  "weights": {
+   "z": 2,
+   "p": 8
+  },
+  "text": {
+   "eu": "Diametro baten espezifikazioa 35 ± 0,01 mm da. Lagin adierazgarri baten emaitzak: x̄ = 35,002 mm, s = 0,004 mm. Banaketa normala onartuta: a) kalkulatu goiko espezifikazio-mugari dagokion z balioa; b) estimatu pieza akastunen ehunekoa.",
+   "es": "La especificación de un diámetro es 35 ± 0,01 mm. Resultados de una muestra representativa: x̄ = 35,002 mm, s = 0,004 mm. Suponiendo distribución normal: a) calcula el valor z correspondiente al LES; b) estima el porcentaje de piezas defectuosas."
+  }
+ },
+ {
+  "id": "capabilitySummary-1-1",
+  "origin": "generated",
+  "seed": 1,
+  "review": "review-needed",
+  "difficulty": 1,
+  "dataset": {
+   "kind": "summary",
+   "unit": "mm",
+   "mean": "34.9743",
+   "sd": "0.0032",
+   "sdKind": "sigma"
+  },
+  "spec": {
+   "lsl": "34.95",
+   "usl": "34.989",
+   "nominal": "35"
+  },
+  "rules": {
+   "sd": "sigma",
+   "capableThresholds": [
+    1,
+    1.33
+   ]
+  },
+  "asks": [
+   {
+    "id": "cp",
+    "type": "cp"
+   },
+   {
+    "id": "cpk",
+    "type": "cpk"
+   },
+   {
+    "id": "cen",
+    "type": "centered"
+   },
+   {
+    "id": "cap",
+    "type": "capable",
+    "index": "cp"
+   }
+  ],
+  "weights": {
+   "cp": 3,
+   "cpk": 3,
+   "cen": 1,
+   "cap": 1
+  },
+  "text": {
+   "eu": "Kota baten mugak 34,95 – 34,989 mm dira. Prozesuak, kontrol estatistikoan, μ = 34,9743 mm eta σ = 0,0032 mm ditu. Kalkulatu prozesuaren gaitasun-indizeak, adierazi zentratuta dagoen (eta, ez badago, zein mugatara desplazatuta), eta erabaki gai den Cp-n oinarrituta. Irizpidea: indizea < 1 → ez gai; 1 ≤ indizea < 1,33 → mugan; indizea ≥ 1,33 → gai.",
+   "es": "Los límites de una cota son 34,95 – 34,989 mm. El proceso, bajo control estadístico, tiene μ = 34,9743 mm y σ = 0,0032 mm. Calcula los índices de capacidad del proceso, indica si está centrado (y, si no, hacia qué límite está desplazado) y decide si es capaz según Cp. Criterio: índice < 1 → no capaz; 1 ≤ índice < 1,33 → límite; índice ≥ 1,33 → capaz."
+  }
+ },
+ {
+  "id": "capabilitySubgroups-2-1",
+  "origin": "generated",
+  "seed": 1,
+  "review": "review-needed",
+  "difficulty": 2,
+  "dataset": {
+   "kind": "subgroups",
+   "unit": "mm",
+   "groups": [
+    [
+     "39.959",
+     "39.956",
+     "39.954",
+     "39.956",
+     "39.953"
+    ],
+    [
+     "39.959",
+     "39.958",
+     "39.959",
+     "39.959",
+     "39.957"
+    ],
+    [
+     "39.957",
+     "39.953",
+     "39.957",
+     "39.959",
+     "39.952"
+    ],
+    [
+     "39.959",
+     "39.957",
+     "39.954",
+     "39.957",
+     "39.959"
+    ],
+    [
+     "39.954",
+     "39.956",
+     "39.957",
+     "39.958",
+     "39.955"
+    ],
+    [
+     "39.957",
+     "39.958",
+     "39.956",
+     "39.956",
+     "39.953"
+    ],
+    [
+     "39.954",
+     "39.96",
+     "39.956",
+     "39.959",
+     "39.956"
+    ],
+    [
+     "39.952",
+     "39.958",
+     "39.958",
+     "39.959",
+     "39.957"
+    ],
+    [
+     "39.958",
+     "39.955",
+     "39.96",
+     "39.956",
+     "39.955"
+    ],
+    [
+     "39.957",
+     "39.955",
+     "39.953",
+     "39.957",
+     "39.956"
+    ],
+    [
+     "39.958",
+     "39.955",
+     "39.957",
+     "39.956",
+     "39.96"
+    ]
+   ]
+  },
+  "spec": {
+   "lsl": "39.94",
+   "usl": "39.965",
+   "nominal": "40"
+  },
+  "rules": {
+   "sd": "s",
+   "sigmaHat": "Rbar/d2",
+   "capableThresholds": [
+    1,
+    1.33
+   ]
+  },
+  "asks": [
+   {
+    "id": "sh",
+    "type": "sigmaHat"
+   },
+   {
+    "id": "cp",
+    "type": "cp"
+   },
+   {
+    "id": "cpk",
+    "type": "cpk"
+   },
+   {
+    "id": "cap",
+    "type": "capable",
+    "index": "cpk"
+   }
+  ],
+  "weights": {
+   "sh": 2,
+   "cp": 3,
+   "cpk": 3,
+   "cap": 2
+  },
+  "text": {
+   "eu": "Kota baten mugak 39,94 – 39,965 mm dira. 11 azpitalde hartu dira, bakoitza 5 neurketakoa (taula, mm-tan). Estimatu σ R̄/d₂ bidez, kalkulatu Cp eta Cpk, eta erabaki prozesua gai den Cpk-n oinarrituta. Irizpidea: indizea < 1 → ez gai; 1 ≤ indizea < 1,33 → mugan; indizea ≥ 1,33 → gai.",
+   "es": "Los límites de una cota son 39,94 – 39,965 mm. Se han tomado 11 subgrupos de 5 medidas cada uno (tabla, en mm). Estima σ mediante R̄/d₂, calcula Cp y Cpk y decide si el proceso es capaz según Cpk. Criterio: índice < 1 → no capaz; 1 ≤ índice < 1,33 → límite; índice ≥ 1,33 → capaz."
+  }
+ },
+ {
+  "id": "xbarR-2-1",
+  "origin": "generated",
+  "seed": 1,
+  "review": "review-needed",
+  "difficulty": 2,
+  "dataset": {
+   "kind": "subgroups",
+   "unit": "mm",
+   "groups": [
+    [
+     "30.01",
+     "30.012",
+     "30.014",
+     "30.023",
+     "30.019"
+    ],
+    [
+     "30.035",
+     "30.041",
+     "30.042",
+     "30.035",
+     "30.046"
+    ],
+    [
+     "30.005",
+     "30.021",
+     "30.005",
+     "30.031",
+     "30.019"
+    ],
+    [
+     "30.026",
+     "30.034",
+     "30.024",
+     "30.011",
+     "30.014"
+    ],
+    [
+     "30.019",
+     "30.025",
+     "30.012",
+     "30.008",
+     "30.02"
+    ],
+    [
+     "30.011",
+     "30.017",
+     "30.006",
+     "30.021",
+     "30.01"
+    ],
+    [
+     "30.02",
+     "30.021",
+     "30.023",
+     "30.025",
+     "30.01"
+    ],
+    [
+     "30.006",
+     "30.008",
+     "30.011",
+     "29.994",
+     "29.997"
+    ],
+    [
+     "30.019",
+     "30.036",
+     "30.006",
+     "30.006",
+     "30.02"
+    ],
+    [
+     "30.024",
+     "30.02",
+     "30.019",
+     "30.017",
+     "30.03"
+    ],
+    [
+     "30.027",
+     "30.018",
+     "30.019",
+     "30.017",
+     "30.022"
+    ],
+    [
+     "30.017",
+     "30.022",
+     "30.022",
+     "30.034",
+     "30.005"
+    ],
+    [
+     "30.029",
+     "30.012",
+     "30.029",
+     "30.016",
+     "30.023"
+    ],
+    [
+     "30.026",
+     "30.027",
+     "30.018",
+     "30.036",
+     "30.018"
+    ],
+    [
+     "30.008",
+     "30.03",
+     "30.007",
+     "30.03",
+     "30.013"
+    ]
+   ]
+  },
+  "rules": {
+   "sd": "s",
+   "sigmaHat": "Rbar/d2"
+  },
+  "asks": [
+   {
+    "id": "lx",
+    "type": "controlLimits",
+    "chart": "xbar"
+   },
+   {
+    "id": "l2",
+    "type": "controlLimits",
+    "chart": "R"
+   },
+   {
+    "id": "oc",
+    "type": "outOfControl",
+    "chart": "xbar"
+   }
+  ],
+  "weights": {
+   "lx": 4,
+   "l2": 3,
+   "oc": 3
+  },
+  "text": {
+   "eu": "Diametro bat kontrolatzeko 15 azpitalde hartu dira, bakoitza 5 piezakoa (taula, mm-tan). Kalkulatu X̄-R kontrol-grafikoen erdiko lerroa eta kontrol-mugak (taulako konstanteekin), eta adierazi zein azpitalde dauden kontrolaz kanpo X̄ grafikoan (puntu bat mugetatik kanpo).",
+   "es": "Para controlar un diámetro se han tomado 15 subgrupos de 5 piezas (tabla, en mm). Calcula la línea central y los límites de control de los gráficos X̄-R (con las constantes de la tabla) e indica qué subgrupos están fuera de control en el gráfico X̄ (un punto fuera de los límites)."
+  }
+ },
+ {
+  "id": "attributes-2-1",
+  "origin": "generated",
+  "seed": 1,
+  "review": "review-needed",
+  "difficulty": 2,
+  "dataset": {
+   "kind": "attributes",
+   "chart": "c",
+   "samples": [
+    {
+     "n": 1,
+     "defects": 9
+    },
+    {
+     "n": 1,
+     "defects": 4
+    },
+    {
+     "n": 1,
+     "defects": 14
+    },
+    {
+     "n": 1,
+     "defects": 8
+    },
+    {
+     "n": 1,
+     "defects": 7
+    },
+    {
+     "n": 1,
+     "defects": 5
+    },
+    {
+     "n": 1,
+     "defects": 4
+    },
+    {
+     "n": 1,
+     "defects": 12
+    },
+    {
+     "n": 1,
+     "defects": 9
+    },
+    {
+     "n": 1,
+     "defects": 5
+    },
+    {
+     "n": 1,
+     "defects": 7
+    },
+    {
+     "n": 1,
+     "defects": 6
+    },
+    {
+     "n": 1,
+     "defects": 2
+    },
+    {
+     "n": 1,
+     "defects": 6
+    },
+    {
+     "n": 1,
+     "defects": 5
+    }
+   ]
+  },
+  "rules": {
+   "sd": "s"
+  },
+  "asks": [
+   {
+    "id": "lim",
+    "type": "controlLimits",
+    "chart": "c"
+   },
+   {
+    "id": "oc",
+    "type": "outOfControl",
+    "chart": "c"
+   }
+  ],
+  "weights": {
+   "lim": 6,
+   "oc": 4
+  },
+  "text": {
+   "eu": "15 lagin ikuskatu dira (taula). Kalkulatu akats-kopurua unitateko (c) grafikoaren erdiko lerroa eta kontrol-mugak (LCL negatiboa bada, 0), eta adierazi zein lagin dauden kontrolaz kanpo.",
+   "es": "Se han inspeccionado 15 muestras (tabla). Calcula la línea central y los límites de control del gráfico de número de defectos por unidad de inspección (c) (si el LCI sale negativo, 0) e indica qué muestras están fuera de control."
+  }
+ },
+ {
+  "id": "pareto-1-1",
+  "origin": "generated",
+  "seed": 1,
+  "review": "review-needed",
+  "difficulty": 1,
+  "dataset": {
+   "kind": "pareto",
+   "items": [
+    {
+     "label": "A",
+     "value": "1600"
+    },
+    {
+     "label": "B",
+     "value": "900"
+    },
+    {
+     "label": "C",
+     "value": "600"
+    },
+    {
+     "label": "D",
+     "value": "3500"
+    },
+    {
+     "label": "E",
+     "value": "5000"
+    },
+    {
+     "label": "F",
+     "value": "2100"
+    }
+   ]
+  },
+  "rules": {
+   "sd": "s",
+   "paretoThreshold": 80,
+   "paretoRule": "crossing"
+  },
+  "asks": [
+   {
+    "id": "pa",
+    "type": "pareto"
+   }
+  ],
+  "weights": {
+   "pa": 10
+  },
+  "text": {
+   "eu": "Fabrikazio-prozesu bateko galerak kausaka kuantifikatu dira (taula, € — A: Ertzaren higadura; B: Erreminta-aldaketaren denbora; C: Programatu gabeko geldialdiak; D: Hozgarriaren falta; E: Plano okerrak; F: Isuri hidraulikoak). Egin Pareto analisia: ordenatu kausak, kalkulatu ehuneko metatua eta adierazi A klaseko kausak (% 80a lortu edo gainditzen den kausaraino, hori barne).",
+   "es": "Se han cuantificado por causas las pérdidas de un proceso de fabricación (tabla, € — A: Desgaste del filo; B: Tiempo de cambio de herramienta; C: Paradas no programadas; D: Falta de refrigerante; E: Errores en los planos; F: Fugas hidráulicas). Realiza el análisis de Pareto: ordena las causas, calcula el porcentaje acumulado e indica las causas de clase A (hasta la causa con la que se alcanza o supera el 80 %, incluida)."
+  }
+ }
+]

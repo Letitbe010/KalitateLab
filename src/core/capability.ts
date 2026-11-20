@@ -75,7 +75,7 @@ export function rangeOf(g: Decimal[]): Decimal {
   return D.sub(hi, lo);
 }
 
-export function sigmaHat(ds: Dataset, rule: SigmaHatRule): SigmaHat {
+export function sigmaHat(ds: Dataset, rule: Exclude<SigmaHatRule, 'either'>): SigmaHat {
   if (rule === 's') return { value: describeDs(ds).s, rule };
   const groups = equalGroups(ds);
   const n = groups[0]!.length;

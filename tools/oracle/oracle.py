@@ -210,16 +210,183 @@ def random_cases(rng):
     return cases
 
 
+# ---------------------------------------------------------------- pool exercises
+
+
+def raw_values(ds):
+    if ds["kind"] == "values":
+        return [F(v) for v in ds["values"]]
+    if ds["kind"] == "subgroups":
+        return [F(v) for g in ds["groups"] for v in g]
+    if ds["kind"] == "freq":
+        out = []
+        for c in ds["classes"]:
+            x = F(c["x"]) if "x" in c else (F(c["a"]) + F(c["b"])) / 2
+            out += [x] * c["f"]
+        return out
+    return None
+
+
+def rbar_d2(groups):
+    gs = [[F(v) for v in g] for g in groups]
+    n = len(gs[0])
+    rbar = sum(max(g) - min(g) for g in gs) / len(gs)
+    return float(rbar / k(n, "d2"))
+
+
+def sbar_c4(groups):
+    n = len(groups[0])
+    sbar = sum(statistics.stdev([float(F(v)) for v in g]) for g in groups) / len(groups)
+    return sbar / float(k(n, "c4"))
+
+
+def process_stats(ex):
+    """(mu, [sigma variants]) following the exercise rules; first variant is the primary answer."""
+    ds, rules = ex["dataset"], ex["rules"]
+    if ds["kind"] == "summary":
+        return float(F(ds["mean"])), [float(F(ds["sd"]))]
+    xs = raw_values(ds)
+    mu = float(sum(xs) / len(xs))
+    s = float(np.sqrt(float(statistics.variance(xs))))
+    sig = float(np.sqrt(float(statistics.pvariance(xs))))
+    rule = rules.get("sigmaHat")
+    if rule == "either":
+        return mu, [rbar_d2(ds["groups"]), s]
+    if rule == "Rbar/d2":
+        return mu, [rbar_d2(ds["groups"])]
+    if rule == "sbar/c4":
+        return mu, [sbar_c4(ds["groups"])]
+    return mu, {"s": [s], "sigma": [sig], "either": [s, sig]}[rules["sd"]]
+
+
+def pop_fraction(ask, ex, mu, sd):
+    if "bound" in ask:
+        b = float(F(ask["bound"]))
+        return float(norm.cdf((b - mu) / sd)) if ask["side"] in ("lt", "le") else float(norm.sf((b - mu) / sd))
+    sp = ex.get("spec", {})
+    tails = ask.get("tails", "outside")
+    p = 0.0
+    if tails != "above" and "lsl" in sp:
+        p += float(norm.cdf((float(F(sp["lsl"])) - mu) / sd))
+    if tails != "below" and "usl" in sp:
+        p += float(norm.sf((float(F(sp["usl"])) - mu) / sd))
+    return p
+
+
+def cap_indices(ex, mu, sd):
+    sp = ex["spec"]
+    lsl = float(F(sp["lsl"])) if "lsl" in sp else None
+    usl = float(F(sp["usl"])) if "usl" in sp else None
+    out = {}
+    if usl is not None:
+        out["cpu"] = (usl - mu) / (3 * sd)
+    if lsl is not None:
+        out["cpl"] = (mu - lsl) / (3 * sd)
+    if usl is not None and lsl is not None:
+        out["cp"] = (usl - lsl) / (6 * sd)
+    out["cpk"] = min(out.get("cpu", np.inf), out.get("cpl", np.inf))
+    return out
+
+
+def verdict(v, th):
+    return "not" if v < th[0] else "marginal" if v < th[1] else "capable"
+
+
+def solve_pool(ex):
+    ds, rules = ex["dataset"], ex["rules"]
+    res = {}
+    for ask in ex["asks"]:
+        t, aid = ask["type"], ask["id"]
+        if t == "mean":
+            xs = raw_values(ds)
+            res[aid] = [float(F(ds["mean"]))] if xs is None else [float(sum(xs) / len(xs))]
+        elif t == "sd":
+            xs = raw_values(ds)
+            s = float(np.sqrt(float(statistics.variance(xs))))
+            sig = float(np.sqrt(float(statistics.pvariance(xs))))
+            res[aid] = {"s": [s], "sigma": [sig], "either": [s, sig]}[rules["sd"]]
+        elif t == "pctSample":
+            xs = raw_values(ds)
+            b = F(ask["bound"])
+            test = {"lt": lambda x: x < b, "le": lambda x: x <= b, "gt": lambda x: x > b, "ge": lambda x: x >= b}[ask["side"]]
+            res[aid] = [100 * sum(1 for x in xs if test(x)) / len(xs)]
+        elif t == "pctPopulation":
+            mu, sds = process_stats(ex)
+            res[aid] = [100 * pop_fraction(ask, ex, mu, sd) for sd in sds]
+        elif t == "z":
+            mu, sds = process_stats(ex)
+            res[aid] = [(float(F(ask["bound"])) - mu) / sd for sd in sds]
+        elif t in ("cp", "cpk", "cpu", "cpl"):
+            mu, sds = process_stats(ex)
+            res[aid] = [cap_indices(ex, mu, sd)[t] for sd in sds]
+        elif t == "capable":
+            mu, sds = process_stats(ex)
+            th = rules.get("capableThresholds", [1, 1.33])
+            res[aid] = sorted({verdict(cap_indices(ex, mu, sd)[ask.get("index", "cp")], th) for sd in sds})
+        elif t == "centered":
+            sp = ex["spec"]
+            mu = F(ds["mean"]) if ds["kind"] == "summary" else sum(raw_values(ds)) / len(raw_values(ds))
+            mid = (F(sp["lsl"]) + F(sp["usl"])) / 2
+            res[aid] = ["yes" if mu == mid else "USL" if mu > mid else "LSL"]
+        elif t == "sigmaHat":
+            rule = rules.get("sigmaHat", "s")
+            xs = raw_values(ds)
+            s = float(np.sqrt(float(statistics.variance(xs))))
+            res[aid] = {"s": [s], "Rbar/d2": [rbar_d2(ds["groups"])] if ds["kind"] == "subgroups" else None,
+                        "sbar/c4": [sbar_c4(ds["groups"])] if ds["kind"] == "subgroups" else None,
+                        "either": [rbar_d2(ds["groups"]), s] if ds["kind"] == "subgroups" else None}[rule]
+        elif t in ("controlLimits", "outOfControl"):
+            chart = ask.get("chart")
+            if ds["kind"] == "subgroups":
+                if rules.get("sigmaHat") == "sbar/c4" or chart == "s":
+                    n = len(ds["groups"][0])
+                    means = [float(sum(F(v) for v in g) / n) for g in ds["groups"]]
+                    sds_ = [statistics.stdev([float(F(v)) for v in g]) for g in ds["groups"]]
+                    xbb = float(sum(sum(F(v) for v in g) / n for g in ds["groups"]) / len(ds["groups"]))
+                    sbar = sum(sds_) / len(sds_)
+                    if chart == "s":
+                        L = (sbar, float(k(n, "B4")) * sbar, float(k(n, "B3")) * sbar)
+                        pts = sds_
+                    else:
+                        w = float(k(n, "A3")) * sbar
+                        L = (xbb, xbb + w, xbb - w)
+                        pts = means
+                    out = [i + 1 for i, p in enumerate(pts) if p > L[1] or p < L[2]]
+                    res[aid] = list(L) if t == "controlLimits" else out
+                else:
+                    r = xbar_r(ds["groups"])
+                    if t == "controlLimits":
+                        res[aid] = [float(F(r["xbarbar"])), float(F(r["uclX"])), float(F(r["lclX"]))] if chart == "xbar" else [float(F(r["rbar"])), float(F(r["uclR"])), float(F(r["lclR"]))]
+                    else:
+                        res[aid] = r["outXbar"] if chart == "xbar" else r["outR"]
+            else:
+                a = attributes(ds["chart"], ds["samples"])
+                if t == "controlLimits":
+                    l0 = a["limits"][0]
+                    res[aid] = [float(l0["cl"]), l0["ucl"], l0["lcl"]]
+                else:
+                    res[aid] = a["out"]
+        elif t == "pareto":
+            r = pareto([[i["label"], i["value"]] for i in ds["items"]], rules.get("paretoThreshold", 80), rules.get("paretoRule", "crossing"))
+            res[aid] = {"order": [x["label"] for x in r["rows"]], "cumPct": [float(Fraction(x["cumPct"])) for x in r["rows"]], "classA": r["classA"]}
+        else:
+            raise ValueError(t)
+    return res
+
+
 def main():
     out_path, golden_path = Path(sys.argv[1]), Path(sys.argv[2])
     golden = json.loads(golden_path.read_text(encoding="utf8"))
+    pool_path = Path(sys.argv[3]) if len(sys.argv) > 3 else ROOT / "src/data/pool.json"
+    pool = json.loads(pool_path.read_text(encoding="utf8"))
     res = {
         "golden": [{"id": c["id"], "kind": c["kind"], "result": golden_case(c)} for c in golden["cases"]],
         "random": random_cases(np.random.default_rng(20261119)),
+        "pool": [{"id": e["id"], "result": solve_pool(e)} for e in pool],
     }
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(res, ensure_ascii=False, indent=1), encoding="utf8")
-    print(f"oracle: {len(res['golden'])} golden + {len(res['random'])} random cases -> {out_path}")
+    print(f"oracle: {len(res['golden'])} golden + {len(res['random'])} random + {len(res['pool'])} pool cases -> {out_path}")
 
 
 if __name__ == "__main__":

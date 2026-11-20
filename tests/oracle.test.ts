@@ -14,6 +14,8 @@ import type { ChartKind, Dataset } from '../src/core/model';
 import { phi, phiB, populationDefects, upperTail, upperTailB } from '../src/core/normal';
 import { pareto } from '../src/core/pareto';
 import golden from './golden/golden.json';
+import { exerciseFromJSON } from '../src/core/serialize';
+import { solveExercise } from '../src/core/solve';
 
 const FILE = 'tools/oracle/out/oracle.json';
 const required = process.env.ORACLE_REQUIRED === '1';
@@ -21,7 +23,7 @@ const present = existsSync(FILE);
 if (required && !present) throw new Error(`ORACLE_REQUIRED=1 but ${FILE} is missing`);
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-const data: { golden: { id: string; kind: string; result: any }[]; random: { kind: string; input: any; result: any }[] } = present
+const data: { golden: { id: string; kind: string; result: any }[]; random: { kind: string; input: any; result: any }[]; pool?: unknown[] } = present
   ? JSON.parse(readFileSync(FILE, 'utf8'))
   : { golden: [], random: [] };
 
@@ -165,6 +167,36 @@ describe.skipIf(!present)('oracle: seeded random cases', () => {
       expect(S(r.total)).toBe(c.result.total);
       expect(r.rows.map((x) => [x.label, S(x.cumPct)])).toEqual(c.result.rows.map((x: any) => [x.label, x.cumPct]));
       expect(r.classA).toEqual(c.result.classA);
+    }
+  });
+});
+
+describe.skipIf(!present)('oracle: pool exercises (every ask, every accepted variant)', () => {
+  const poolFile = 'src/data/pool.json';
+  const pool = (JSON.parse(readFileSync(poolFile, 'utf8')) as unknown[]).map(exerciseFromJSON);
+  const res = (data as any).pool as { id: string; result: Record<string, any> }[];
+  it('the oracle solved every pool exercise', () => expect(res.map((r) => r.id)).toEqual(pool.map((e) => e.id)));
+  it.each(pool.map((e) => [e.id, e] as const))('%s', (id, e) => {
+    const o = res.find((r) => r.id === id)!.result;
+    const sol = solveExercise(e);
+    for (const [aid, x] of Object.entries(sol)) {
+      const p = o[aid];
+      if (x.kind === 'number') {
+        expect(x.accepted.length).toBe(p.length);
+        x.accepted.forEach((a, i) => expectRel(a.value, p[i], 1e-9, `${id}.${aid}[${i}]`));
+      } else if (x.kind === 'limits') {
+        expectRel(x.cl, p[0], 1e-12, `${id}.${aid}.cl`);
+        expectRel(x.ucl, p[1], 1e-12, `${id}.${aid}.ucl`);
+        expect(Math.abs(x.lcl - p[2])).toBeLessThan(1e-12 * Math.max(1, Math.abs(x.cl)));
+      } else if (x.kind === 'choice') {
+        expect([x.value]).toEqual(p);
+      } else if (x.kind === 'set') {
+        expect(x.value).toEqual(p);
+      } else {
+        expect(x.order).toEqual(p.order);
+        expect(x.classA).toEqual(p.classA);
+        x.cumPct.forEach((c, i) => expectRel(c, p.cumPct[i], 1e-12, `${id}.${aid}.cum[${i}]`));
+      }
     }
   });
 });

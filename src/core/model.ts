@@ -30,7 +30,8 @@ export interface Spec {
 }
 
 export type SdRule = 's' | 'sigma' | 'either';
-export type SigmaHatRule = 's' | 'Rbar/d2' | 'sbar/c4';
+/** 'either': the statement does not say; s of all data and R̄/d₂ are both accepted (spec §3). */
+export type SigmaHatRule = 's' | 'Rbar/d2' | 'sbar/c4' | 'either';
 
 /** Comparison of a value with a bound: strict (<, >) or inclusive (≤, ≥). Stated in the exercise. */
 export type BoundSide = 'lt' | 'le' | 'gt' | 'ge';
@@ -89,4 +90,6 @@ export interface Exercise {
   asks: Ask[];
   weights: Record<string, number>;
   text: { eu: string; es: string };
+  /** pool entries: 'review-needed' until the user approves them (spec §9.1) */
+  review?: 'review-needed' | 'approved';
 }

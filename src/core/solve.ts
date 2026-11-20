@@ -80,6 +80,10 @@ export function processStats(ex: Exercise): Stats {
   const d = describeDs(ds);
   const base = { mu: D.toNumber(d.mean), muExact: d.mean, s: d.s, sigmaPop: d.sigma, n: d.n };
   const rule = ex.rules.sigmaHat;
+  if (rule === 'either') {
+    const r = estimateSigma(ds, 'Rbar/d2');
+    return { ...base, sigma: r.value, sigmas: [{ value: r.value, note: 'Rbar/d2' }, { value: d.s, note: 's' }] };
+  }
   if (rule && rule !== 's') {
     const sh = estimateSigma(ds, rule);
     return { ...base, sigma: sh.value, sigmas: [{ value: sh.value, note: rule }] };
@@ -191,6 +195,14 @@ export function solveAsk(ex: Exercise, ask: Ask): Expected {
     }
     case 'sigmaHat': {
       const rule = ex.rules.sigmaHat ?? 's';
+      if (rule === 'either') {
+        const r = estimateSigma(ds, 'Rbar/d2').value;
+        const s = estimateSigma(ds, 's').value;
+        return num(r, 'length', [
+          { value: r, note: 'Rbar/d2' },
+          { value: s, note: 's' },
+        ]);
+      }
       return num(estimateSigma(ds, rule).value, 'length');
     }
     case 'controlLimits': {

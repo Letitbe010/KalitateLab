@@ -29,19 +29,10 @@ function ex(dataset: Dataset, asks: Ask[], rules: Partial<Rules> = {}, spec?: Ex
 }
 
 /** Answers built from the solver output (full precision). */
+import { perfectAnswers } from './helpers';
 function perfect(e: Exercise): Record<string, Answer> {
-  const sol = solveExercise(e);
-  const out: Record<string, Answer> = {};
-  for (const [id, x] of Object.entries(sol) as [string, Expected][]) {
-    if (x.kind === 'number') out[id] = { value: fmt(x.value) };
-    if (x.kind === 'limits') out[id] = { cl: fmt(x.cl), ucl: fmt(x.ucl), lcl: fmt(x.lcl) };
-    if (x.kind === 'choice') out[id] = { choice: x.value };
-    if (x.kind === 'set') out[id] = { set: x.value.join(', ') };
-    if (x.kind === 'pareto') out[id] = { order: x.order.join(', '), cumPct: x.cumPct.map(fmt), classA: x.classA.join(', ') };
-  }
-  return out;
+  return perfectAnswers(e);
 }
-
 function diag(e: Exercise, id: string, a: Answer, part = 'value'): DiagnosisId | undefined {
   const r = grade(e, { [id]: a }).asks.find((x) => x.id === id)!;
   const item = r.items.find((i) => i.part === part)!;
