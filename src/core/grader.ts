@@ -548,9 +548,10 @@ function gradeAsk(ex: Exercise, ask: Ask, ans: Answer | undefined, T: Tolerances
     }
     case 'set': {
       const raw = ans?.set?.trim();
-      if (raw === undefined) items = [{ part: 'set', status: 'missing', expected: exp.value }];
+      if (!raw) items = [{ part: 'set', status: 'missing', expected: exp.value }];
       else {
-        const g = parseIntSet(raw);
+        // "0" or "-" means "no sample out of control"; an empty field is unanswered
+        const g = /^(0|-|—|–)$/.test(raw) ? [] : parseIntSet(raw);
         items = [
           g === null
             ? { part: 'set', status: 'invalid', expected: exp.value, given: raw }

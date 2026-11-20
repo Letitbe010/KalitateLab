@@ -53,6 +53,6 @@ describe('pool', () => {
     const lines = ope.map((e) => `${e.id}: ${JSON.stringify(solveExercise(e))}`);
     mkdirSync('tools/oracle/out', { recursive: true }); // gitignored: absent in CI
     writeFileSync('tools/oracle/out/ope-solutions.txt', lines.join('\n') + '\n');
-    expect(lines.length).toBe(6);
+    expect(ope.filter((e) => e.origin === 'ope').length).toBe(6);
   });
 });

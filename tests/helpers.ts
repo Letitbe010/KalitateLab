@@ -11,7 +11,7 @@ export function perfectAnswers(e: Exercise): Record<string, Answer> {
     if (x.kind === 'number') out[id] = { value: fmt(x.value) };
     if (x.kind === 'limits') out[id] = { cl: fmt(x.cl), ucl: fmt(x.ucl), lcl: fmt(x.lcl) };
     if (x.kind === 'choice') out[id] = { choice: x.value };
-    if (x.kind === 'set') out[id] = { set: x.value.join(', ') };
+    if (x.kind === 'set') out[id] = { set: x.value.length ? x.value.join(', ') : '0' };
     if (x.kind === 'pareto') out[id] = { order: x.order.join(', '), cumPct: x.cumPct.map(fmt), classA: x.classA.join(', ') };
   }
   return out;

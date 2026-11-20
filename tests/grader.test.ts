@@ -339,3 +339,14 @@ describe('solve: data decimals', () => {
     expect(dataDecimals({ kind: 'values', unit: '', values: [dec('23,5'), dec('1,0')] })).toBe(1);
   });
 });
+
+describe('grader: out-of-control set input', () => {
+  it('empty is missing; "0" means none', () => {
+    const e = { ...pchart, asks: [{ id: 'oc', type: 'outOfControl' as const, chart: 'p' as const }] };
+    const sol = solveExercise(e).oc as Extract<Expected, { kind: 'set' }>;
+    expect(sol.value).toEqual([]);
+    expect(grade(e, { oc: { set: '' } }).asks[0]!.status).toBe('missing');
+    expect(grade(e, { oc: { set: '0' } }).asks[0]!.status).toBe('correct');
+    expect(grade(e, { oc: { set: '3' } }).asks[0]!.status).toBe('wrong');
+  });
+});

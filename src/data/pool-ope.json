@@ -412,5 +412,148 @@
    "eu": "Ardatza seriean ekoizten da; 1000 unitateko lagin bat hartu da. Plater ildaskatua doan muturraren espezifikazioa Ø31h8 da (30,961 – 31,000 mm). Emaitzak: batez bestekoa 30,9935 mm eta desbiderapena 0,0065 mm. Kalkulatu prozesuaren gaitasuna (Cp, Cpk) eta pieza akastunen ehunekoa (laginean zenbat pieza diren ere esan daiteke: % × 1000).",
    "es": "El árbol se produce en serie y se toma una muestra de 1000 unidades. La especificación del extremo donde se aloja el plato ranurado es Ø31h8 (30,961 – 31,000 mm). Resultados: media 30,9935 mm y desviación 0,0065 mm. Calcula la capacidad del proceso (Cp, Cpk) y el porcentaje de piezas defectuosas (se puede indicar también cuántas en la muestra: % × 1000)."
   }
+ },
+ {
+  "id": "adapted-kq1",
+  "origin": "adapted",
+  "review": "review-needed",
+  "sourceNote": "Espezifikazioko golden kasua (KQ1 + KQ2), §11.2: emaitzak modu independentean egiaztatuak (Python). Enuntziatua zirriborroa.",
+  "difficulty": 1,
+  "dataset": {
+   "kind": "summary",
+   "unit": "mm",
+   "mean": "20.01",
+   "sd": "0.015",
+   "sdKind": "sigma"
+  },
+  "spec": {
+   "lsl": "19.94",
+   "usl": "20.06",
+   "nominal": "20"
+  },
+  "rules": {
+   "sd": "sigma",
+   "capableThresholds": [
+    1,
+    1.33
+   ]
+  },
+  "asks": [
+   {
+    "id": "cp",
+    "type": "cp"
+   },
+   {
+    "id": "cpk",
+    "type": "cpk"
+   },
+   {
+    "id": "cpu",
+    "type": "cpu"
+   },
+   {
+    "id": "cpl",
+    "type": "cpl"
+   },
+   {
+    "id": "cen",
+    "type": "centered"
+   },
+   {
+    "id": "cap",
+    "type": "capable",
+    "index": "cpk"
+   },
+   {
+    "id": "pct",
+    "type": "pctPopulation",
+    "tails": "outside"
+   }
+  ],
+  "weights": {
+   "cp": 2,
+   "cpk": 2,
+   "cpu": 1,
+   "cpl": 1,
+   "cen": 1,
+   "cap": 1,
+   "pct": 2
+  },
+  "text": {
+   "eu": "Kota baten espezifikazioa 20,00 ± 0,06 mm da. Prozesuak, kontrol estatistikoan, μ = 20,01 mm eta σ = 0,015 mm ditu. Kalkulatu Cp, Cpk, Cpu eta Cpl; adierazi zentratuta dagoen; erabaki gai den Cpk-n oinarrituta (Cpk < 1 ez gai; 1 ≤ Cpk < 1,33 mugan; Cpk ≥ 1,33 gai); eta estimatu pieza akastunen ehunekoa (banaketa normala).",
+   "es": "La especificación de una cota es 20,00 ± 0,06 mm. El proceso, bajo control estadístico, tiene μ = 20,01 mm y σ = 0,015 mm. Calcula Cp, Cpk, CpkS y CpkI; indica si está centrado; decide si es capaz según Cpk (Cpk < 1 no capaz; 1 ≤ Cpk < 1,33 límite; Cpk ≥ 1,33 capaz); y estima el porcentaje de piezas defectuosas (distribución normal)."
+  }
+ },
+ {
+  "id": "adapted-kq5",
+  "origin": "adapted",
+  "review": "review-needed",
+  "sourceNote": "Espezifikazioko golden kasua (KQ5), §11.2: emaitzak modu independentean egiaztatuak (Python). Enuntziatua zirriborroa.",
+  "difficulty": 1,
+  "dataset": {
+   "kind": "freq",
+   "unit": "mm",
+   "classes": [
+    {
+     "x": "23.3",
+     "f": 2
+    },
+    {
+     "x": "23.4",
+     "f": 5
+    },
+    {
+     "x": "23.5",
+     "f": 10
+    },
+    {
+     "x": "23.6",
+     "f": 6
+    },
+    {
+     "x": "23.7",
+     "f": 2
+    }
+   ]
+  },
+  "spec": {
+   "lsl": "23.3",
+   "usl": "23.7",
+   "nominal": "23.5"
+  },
+  "rules": {
+   "sd": "either"
+  },
+  "asks": [
+   {
+    "id": "a1",
+    "type": "mean"
+   },
+   {
+    "id": "a2",
+    "type": "sd"
+   },
+   {
+    "id": "b",
+    "type": "pctSample",
+    "bound": "23.4",
+    "side": "le"
+   },
+   {
+    "id": "c",
+    "type": "pctPopulation",
+    "tails": "outside"
+   }
+  ],
+  "weights": {
+   "a1": 1,
+   "a2": 1,
+   "b": 3,
+   "c": 5
+  },
+  "text": {
+   "eu": "23,5 ± 0,2 mm-ko ardatz-populazio batetik 25 elementuko lagin adierazgarri bat neurtu da (taula). a) Kalkulatu batez bestekoa eta desbiderapen estandarra. b) Laginean, zer pieza-ehunekok du 23,4 mm edo txikiagoa? c) Estimatu populazioko pieza akastunen ehunekoa (banaketa normala).",
+   "es": "De una población de ejes de 23,5 ± 0,2 mm se ha medido una muestra representativa de 25 elementos (tabla). a) Calcula la media y la desviación típica. b) En la muestra, ¿qué porcentaje de piezas mide 23,4 mm o menos? c) Estima el porcentaje de piezas defectuosas en la población (distribución normal)."
+  }
  }
 ]
