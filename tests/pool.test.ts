@@ -2,7 +2,7 @@
  * Pool (spec §9): OPE exercises re-modelled (src/data/pool-ope.json) + one pinned generated
  * exercise per template. `WRITE_POOL=1 npx vitest run tests/pool.test.ts` rebuilds pool.json.
  */
-import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { generate, LEVELS, rebuild, TEMPLATES, verifyExercise, type TemplateId } from '../src/core/generator';
 import { grade } from '../src/core/grader';
 import type { Exercise } from '../src/core/model';
@@ -50,6 +50,7 @@ describe('pool', () => {
 
   it('OPE solutions (printed for the user review)', () => {
     const lines = ope.map((e) => `${e.id}: ${JSON.stringify(solveExercise(e))}`);
+    mkdirSync('tools/oracle/out', { recursive: true }); // gitignored: absent in CI
     writeFileSync('tools/oracle/out/ope-solutions.txt', lines.join('\n') + '\n');
     expect(lines.length).toBe(6);
   });
