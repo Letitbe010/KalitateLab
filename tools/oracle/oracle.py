@@ -360,7 +360,8 @@ def solve_pool(ex):
                     else:
                         res[aid] = r["outXbar"] if chart == "xbar" else r["outR"]
             else:
-                a = attributes(ds["chart"], ds["samples"])
+                kind = chart if chart in ("p", "np") and ds["chart"] in ("p", "np") else ds["chart"]
+                a = attributes(kind, ds["samples"])
                 if t == "controlLimits":
                     l0 = a["limits"][0]
                     res[aid] = [float(l0["cl"]), l0["ucl"], l0["lcl"]]

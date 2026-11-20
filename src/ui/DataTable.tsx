@@ -10,6 +10,22 @@ import type { Decimal } from '../core/decimal';
 import { dataDecimals } from '../core/solve';
 import { fmtDec } from './format';
 
+/** Decimals of a finite decimal (denominator 2^a·5^b → max(a, b)). */
+function decimalsOf(x: Decimal): number {
+  let d = x.d;
+  let a = 0;
+  let b = 0;
+  while (d % 2n === 0n) {
+    d /= 2n;
+    a++;
+  }
+  while (d % 5n === 0n) {
+    d /= 5n;
+    b++;
+  }
+  return d === 1n ? Math.max(a, b) : 6;
+}
+
 function rowsOf(ex: Exercise, t: (k: string, v?: Record<string, string | number>) => string): { head: string[]; rows: string[][] } {
   const ds = ex.dataset;
   // measurements keep the instrument resolution (50,000 is not shown as 50)
@@ -52,6 +68,9 @@ export function DataTable({ ex }: { ex: Exercise }) {
   const [copied, setCopied] = useState(false);
   const { head, rows } = rowsOf(ex, t);
   const spec = ex.spec;
+  // specification limits share the precision of the most precise one (19,960, not 19,96)
+  const specDec = spec ? Math.max(0, ...[spec.lsl, spec.usl].filter((v): v is Decimal => !!v).map((v) => decimalsOf(v))) : 0;
+  const sp = (v: Decimal): string => D.toFixed(v, specDec).replace('.', ',').replace('-', '−');
   const copy = () => {
     const text = rows.map((r) => r.join('\t')).join('\n');
     void navigator.clipboard?.writeText(text).then(
@@ -73,9 +92,9 @@ export function DataTable({ ex }: { ex: Exercise }) {
       {spec && (spec.lsl || spec.usl) && (
         <p className="spec-line">
           {t('data.spec')}: {spec.designation ? `${spec.designation} → ` : ''}
-          {spec.lsl ? `${t('spec.lsl')} = ${fmtDec(spec.lsl)}` : ''}
+          {spec.lsl ? `${t('spec.lsl')} = ${sp(spec.lsl)}` : ''}
           {spec.lsl && spec.usl ? ' · ' : ''}
-          {spec.usl ? `${t('spec.usl')} = ${fmtDec(spec.usl)}` : ''} {'unit' in ex.dataset ? ex.dataset.unit : ''}
+          {spec.usl ? `${t('spec.usl')} = ${sp(spec.usl)}` : ''} {'unit' in ex.dataset ? ex.dataset.unit : ''}
         </p>
       )}
       <div className="table-wrap">

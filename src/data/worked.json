@@ -1,0 +1,15 @@
+{
+  "_comment": "Worked exercises (spec §15). Each one is built on a verified pool exercise; every number is computed by the solvers at run time. Texts are drafts until the user reviews them. nowYou: template and level of the 'now you' exercise.",
+  "worked": [
+    { "id": "x-s-zerrenda", "pool": "adapted-values-1", "nowYou": { "template": "freqTable", "level": 1 }, "title": { "eu": "x̄ eta s datu-zerrenda batetik", "es": "x̄ y s a partir de una lista de datos" }, "review": "draft" },
+    { "id": "maiztasun-taula", "pool": "ope-euskadi-2020-7", "nowYou": { "template": "freqTable", "level": 1 }, "title": { "eu": "Maiztasun-taula: % laginean eta populazioan (Euskadi OPE 2020)", "es": "Tabla de frecuencias: % en la muestra y en la población (OPE Euskadi 2020)" }, "review": "draft" },
+    { "id": "akastunak-normala", "pool": "ope-madrid-2022-3", "nowYou": { "template": "defectsSummary", "level": 1 }, "title": { "eu": "% akastunak banaketa normalarekin (Madril OPE 2022)", "es": "% defectuosas con la distribución normal (OPE Madrid 2022)" }, "review": "draft" },
+    { "id": "gaitasuna-laburpena", "pool": "ope-valencia-2025-a3b", "nowYou": { "template": "capabilitySummary", "level": 2 }, "title": { "eu": "Cp eta Cpk laburpen-datuetatik (Valentzia OPE 2025)", "es": "Cp y Cpk a partir de datos resumen (OPE Valencia 2025)" }, "review": "draft" },
+    { "id": "gaitasuna-azpitaldeak", "pool": "ope-madrid-2025-3", "nowYou": { "template": "capabilitySubgroups", "level": 2 }, "title": { "eu": "Cp eta Cpk azpitaldeekin, ISO kota (Madril OPE 2025)", "es": "Cp y Cpk con subgrupos, cota ISO (OPE Madrid 2025)" }, "review": "draft" },
+    { "id": "xbar-r", "pool": "xbarR-2-1", "nowYou": { "template": "xbarR", "level": 2 }, "title": { "eu": "X̄-R grafikoa eta kontrolaz kanpoko puntuak", "es": "Gráfico X̄-R y puntos fuera de control" }, "review": "draft" },
+    { "id": "xbar-s", "pool": "xbarR-3-7", "nowYou": { "template": "xbarR", "level": 3 }, "title": { "eu": "X̄-s grafikoa", "es": "Gráfico X̄-s" }, "review": "draft" },
+    { "id": "p-np", "pool": "adapted-pnp-1", "nowYou": { "template": "attributes", "level": 2 }, "title": { "eu": "p eta np grafikoak", "es": "Gráficos p y np" }, "review": "draft" },
+    { "id": "c-grafikoa", "pool": "adapted-c-1", "nowYou": { "template": "attributes", "level": 2 }, "title": { "eu": "c grafikoa", "es": "Gráfico c" }, "review": "draft" },
+    { "id": "pareto", "pool": "ope-madrid-2025-10", "nowYou": { "template": "pareto", "level": 1 }, "title": { "eu": "Pareto diagrama (Madril OPE 2025)", "es": "Diagrama de Pareto (OPE Madrid 2025)" }, "review": "draft" }
+  ]
+}

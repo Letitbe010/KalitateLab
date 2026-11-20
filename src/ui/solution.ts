@@ -3,13 +3,13 @@
  * result with units → checks. Every number comes from the core solvers at run time.
  */
 import { capability, capableVerdict, rangeOf } from '../core/capability';
-import { attributeChart, xbarRChart, xbarSChart } from '../core/charts';
+import { xbarRChart, xbarSChart } from '../core/charts';
 import { constantText } from '../core/constants';
 import * as D from '../core/decimal';
 import { countSample, describe as describeDs } from '../core/descriptive';
 import type { Ask, Exercise } from '../core/model';
 import { pareto } from '../core/pareto';
-import { dataDecimals, defectsFor, processStats } from '../core/solve';
+import { attributesFor, dataDecimals, defectsFor, processStats } from '../core/solve';
 import { fmt, fmtDec } from './format';
 
 type T = (k: string, v?: Record<string, string | number>) => string;
@@ -136,16 +136,17 @@ export function solutionFor(ex: Exercise, ask: Ask, t: T): SolutionBlock {
           if (ask.type === 'outOfControl') lines.push(outLine(ask.chart === 'R' ? c.outR : c.outXbar, (ask.chart === 'R' ? c.ranges : c.means).map(D.toNumber), L, t));
         }
       } else if (ds.kind === 'attributes') {
-        const a = attributeChart(ds.chart, ds.samples);
+        const a = attributesFor(ex, ask.chart);
+        const kind = a.chart;
         const l = a.limits[0]!;
         const N = ds.samples.reduce((s, x) => s + x.n, 0);
         const T = ds.samples.reduce((s, x) => s + x.defects, 0);
         const n = ds.samples[0]!.n;
         const f = (v: number) => fmt(v, 0, 5);
-        if (ds.chart === 'p') lines.push(`p̄ = Σd / Σn = ${T} / ${N} = ${f(l.cl)}; σp = √(p̄(1 − p̄)/n) = √(${f(l.cl)}·${f(1 - l.cl)}/${n}) = ${f(l.sigma)}`);
-        if (ds.chart === 'np') lines.push(`p̄ = ${T} / ${N}; np̄ = ${f(l.cl)}; σ = √(np̄(1 − p̄)) = ${f(l.sigma)}`);
-        if (ds.chart === 'c') lines.push(`c̄ = Σc / k = ${T} / ${ds.samples.length} = ${f(l.cl)}; σ = √c̄ = ${f(l.sigma)}`);
-        if (ds.chart === 'u') lines.push(`ū = Σc / Σn = ${T} / ${N} = ${f(l.cl)}; σ = √(ū/n) = ${f(l.sigma)}`);
+        if (kind === 'p') lines.push(`p̄ = Σd / Σn = ${T} / ${N} = ${f(l.cl)}; σp = √(p̄(1 − p̄)/n) = √(${f(l.cl)}·${f(1 - l.cl)}/${n}) = ${f(l.sigma)}`);
+        if (kind === 'np') lines.push(`p̄ = ${T} / ${N}; np̄ = ${f(l.cl)}; σ = √(np̄(1 − p̄)) = ${f(l.sigma)}`);
+        if (kind === 'c') lines.push(`c̄ = Σc / k = ${T} / ${ds.samples.length} = ${f(l.cl)}; σ = √c̄ = ${f(l.sigma)}`);
+        if (kind === 'u') lines.push(`ū = Σc / Σn = ${T} / ${N} = ${f(l.cl)}; σ = √(ū/n) = ${f(l.sigma)}`);
         lines.push(`${t('field.ucl')} = ${t('field.cl')} + 3σ = ${f(l.ucl)}`);
         lines.push(l.lclRaw < 0 ? t('sol.lclClip', { v: f(l.lclRaw) }) : `${t('field.lcl')} = ${t('field.cl')} − 3σ = ${f(l.lcl)}`);
         if (ask.type === 'outOfControl') lines.push(outLine(a.out, a.points.map(D.toNumber), f, t));

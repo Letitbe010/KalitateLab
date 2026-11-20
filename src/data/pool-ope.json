@@ -555,5 +555,287 @@
    "eu": "23,5 ± 0,2 mm-ko ardatz-populazio batetik 25 elementuko lagin adierazgarri bat neurtu da (taula). a) Kalkulatu batez bestekoa eta desbiderapen estandarra. b) Laginean, zer pieza-ehunekok du 23,4 mm edo txikiagoa? c) Estimatu populazioko pieza akastunen ehunekoa (banaketa normala).",
    "es": "De una población de ejes de 23,5 ± 0,2 mm se ha medido una muestra representativa de 25 elementos (tabla). a) Calcula la media y la desviación típica. b) En la muestra, ¿qué porcentaje de piezas mide 23,4 mm o menos? c) Estima el porcentaje de piezas defectuosas en la población (distribución normal)."
   }
+ },
+ {
+  "id": "adapted-values-1",
+  "origin": "adapted",
+  "review": "review-needed",
+  "sourceNote": "Ariketa egokitua (datu propioak), 1. ebatzia: x̄ eta s datu-zerrendatik ebatzirako (spec §15.1). Enuntziatua zirriborroa.",
+  "difficulty": 1,
+  "dataset": {
+   "kind": "values",
+   "unit": "mm",
+   "values": [
+    "9.99",
+    "10.01",
+    "10.00",
+    "9.98",
+    "10.02",
+    "10.01",
+    "9.99",
+    "10.00",
+    "10.03",
+    "9.97"
+   ]
+  },
+  "rules": {
+   "sd": "s"
+  },
+  "asks": [
+   {
+    "id": "m",
+    "type": "mean"
+   },
+   {
+    "id": "s",
+    "type": "sd"
+   }
+  ],
+  "weights": {
+   "m": 4,
+   "s": 6
+  },
+  "text": {
+   "eu": "Ø10 mm-ko 10 ardatz neurtu dira kalibre batekin (0,01 mm-ko bereizmena); emaitzak taulan daude. Kalkulatu batez bestekoa eta laginaren desbiderapen estandarra (n − 1).",
+   "es": "Se han medido 10 ejes de Ø10 mm con un calibre (resolución 0,01 mm); los resultados están en la tabla. Calcula la media y la desviación típica muestral (n − 1)."
+  }
+ },
+ {
+  "id": "adapted-pnp-1",
+  "origin": "adapted",
+  "review": "review-needed",
+  "sourceNote": "Ariketa egokitua (datu propioak), 8. ebatzia: p eta np grafikoak datu berberekin ebatzirako (spec §15.1). Enuntziatua zirriborroa.",
+  "difficulty": 2,
+  "dataset": {
+   "kind": "attributes",
+   "chart": "p",
+   "samples": [
+    {
+     "n": 100,
+     "defects": 4
+    },
+    {
+     "n": 100,
+     "defects": 6
+    },
+    {
+     "n": 100,
+     "defects": 3
+    },
+    {
+     "n": 100,
+     "defects": 5
+    },
+    {
+     "n": 100,
+     "defects": 7
+    },
+    {
+     "n": 100,
+     "defects": 2
+    },
+    {
+     "n": 100,
+     "defects": 4
+    },
+    {
+     "n": 100,
+     "defects": 5
+    },
+    {
+     "n": 100,
+     "defects": 3
+    },
+    {
+     "n": 100,
+     "defects": 6
+    },
+    {
+     "n": 100,
+     "defects": 14
+    },
+    {
+     "n": 100,
+     "defects": 4
+    },
+    {
+     "n": 100,
+     "defects": 5
+    },
+    {
+     "n": 100,
+     "defects": 3
+    },
+    {
+     "n": 100,
+     "defects": 6
+    },
+    {
+     "n": 100,
+     "defects": 4
+    },
+    {
+     "n": 100,
+     "defects": 5
+    },
+    {
+     "n": 100,
+     "defects": 2
+    },
+    {
+     "n": 100,
+     "defects": 4
+    },
+    {
+     "n": 100,
+     "defects": 6
+    }
+   ]
+  },
+  "rules": {
+   "sd": "s"
+  },
+  "asks": [
+   {
+    "id": "lp",
+    "type": "controlLimits",
+    "chart": "p"
+   },
+   {
+    "id": "lnp",
+    "type": "controlLimits",
+    "chart": "np"
+   },
+   {
+    "id": "oc",
+    "type": "outOfControl",
+    "chart": "p"
+   }
+  ],
+  "weights": {
+   "lp": 4,
+   "lnp": 3,
+   "oc": 3
+  },
+  "text": {
+   "eu": "Torlojuen lerro batean 20 lagin ikuskatu dira, bakoitza 100 unitatekoa, eta unitate akastunak zenbatu dira (taula). Kalkulatu p grafikoaren eta np grafikoaren erdiko lerroa eta kontrol-mugak (LCL negatiboa bada, 0), eta adierazi zein lagin dauden kontrolaz kanpo.",
+   "es": "En una línea de tornillos se han inspeccionado 20 muestras de 100 unidades y se han contado las unidades defectuosas (tabla). Calcula la línea central y los límites de control de los gráficos p y np (si el LCI sale negativo, 0) e indica qué muestras están fuera de control."
+  }
+ },
+ {
+  "id": "adapted-c-1",
+  "origin": "adapted",
+  "review": "review-needed",
+  "sourceNote": "Ariketa egokitua (datu propioak), 9. ebatzia: c grafikoa ebatzirako (spec §15.1). Enuntziatua zirriborroa.",
+  "difficulty": 2,
+  "dataset": {
+   "kind": "attributes",
+   "chart": "c",
+   "samples": [
+    {
+     "n": 1,
+     "defects": 3
+    },
+    {
+     "n": 1,
+     "defects": 5
+    },
+    {
+     "n": 1,
+     "defects": 2
+    },
+    {
+     "n": 1,
+     "defects": 4
+    },
+    {
+     "n": 1,
+     "defects": 6
+    },
+    {
+     "n": 1,
+     "defects": 3
+    },
+    {
+     "n": 1,
+     "defects": 2
+    },
+    {
+     "n": 1,
+     "defects": 5
+    },
+    {
+     "n": 1,
+     "defects": 4
+    },
+    {
+     "n": 1,
+     "defects": 3
+    },
+    {
+     "n": 1,
+     "defects": 12
+    },
+    {
+     "n": 1,
+     "defects": 4
+    },
+    {
+     "n": 1,
+     "defects": 3
+    },
+    {
+     "n": 1,
+     "defects": 2
+    },
+    {
+     "n": 1,
+     "defects": 5
+    },
+    {
+     "n": 1,
+     "defects": 4
+    },
+    {
+     "n": 1,
+     "defects": 3
+    },
+    {
+     "n": 1,
+     "defects": 6
+    },
+    {
+     "n": 1,
+     "defects": 2
+    },
+    {
+     "n": 1,
+     "defects": 4
+    }
+   ]
+  },
+  "rules": {
+   "sd": "s"
+  },
+  "asks": [
+   {
+    "id": "lc",
+    "type": "controlLimits",
+    "chart": "c"
+   },
+   {
+    "id": "oc",
+    "type": "outOfControl",
+    "chart": "c"
+   }
+  ],
+  "weights": {
+   "lc": 6,
+   "oc": 4
+  },
+  "text": {
+   "eu": "Galdaketa-pieza bakoitzean azaleko akatsak zenbatu dira (porositateak, inklusioak...); 20 pieza ikuskatu dira (taula). Kalkulatu c grafikoaren erdiko lerroa eta kontrol-mugak (LCL negatiboa bada, 0), eta adierazi zein pieza dauden kontrolaz kanpo.",
+   "es": "En cada pieza de fundición se han contado los defectos superficiales (porosidades, inclusiones...); se han inspeccionado 20 piezas (tabla). Calcula la línea central y los límites de control del gráfico c (si el LCI sale negativo, 0) e indica qué piezas están fuera de control."
+  }
  }
 ]

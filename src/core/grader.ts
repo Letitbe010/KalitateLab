@@ -377,10 +377,11 @@ function limitsHypotheses(ex: Exercise, ask: Ask, part: 'cl' | 'ucl' | 'lcl', ex
   const hyps: Hyp[] = [];
   if (part === 'lcl' && exp.lclRaw < 0) hyps.push({ id: 'lcl-not-clipped', value: exp.lclRaw });
   const ds = ex.dataset;
-  if (ds.kind === 'attributes' && (ds.chart === 'p' || ds.chart === 'np')) {
+  const kind = ask.chart ?? (ds.kind === 'attributes' ? ds.chart : undefined);
+  if (ds.kind === 'attributes' && (kind === 'p' || kind === 'np')) {
     const n = ds.samples[0]!.n;
     // the limits of the other chart (np ↔ p): values scaled by n
-    const k = ds.chart === 'p' ? n : 1 / n;
+    const k = kind === 'p' ? n : 1 / n;
     const v = part === 'cl' ? exp.cl : part === 'ucl' ? exp.ucl : Math.max(0, exp.lclRaw);
     hyps.push({ id: 'p-np-mixed', value: v * k });
   }

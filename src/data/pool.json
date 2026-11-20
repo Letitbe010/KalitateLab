@@ -557,6 +557,288 @@
   }
  },
  {
+  "id": "adapted-values-1",
+  "origin": "adapted",
+  "sourceNote": "Ariketa egokitua (datu propioak), 1. ebatzia: x̄ eta s datu-zerrendatik ebatzirako (spec §15.1). Enuntziatua zirriborroa.",
+  "review": "review-needed",
+  "difficulty": 1,
+  "dataset": {
+   "kind": "values",
+   "unit": "mm",
+   "values": [
+    "9.99",
+    "10.01",
+    "10",
+    "9.98",
+    "10.02",
+    "10.01",
+    "9.99",
+    "10",
+    "10.03",
+    "9.97"
+   ]
+  },
+  "rules": {
+   "sd": "s"
+  },
+  "asks": [
+   {
+    "id": "m",
+    "type": "mean"
+   },
+   {
+    "id": "s",
+    "type": "sd"
+   }
+  ],
+  "weights": {
+   "m": 4,
+   "s": 6
+  },
+  "text": {
+   "eu": "Ø10 mm-ko 10 ardatz neurtu dira kalibre batekin (0,01 mm-ko bereizmena); emaitzak taulan daude. Kalkulatu batez bestekoa eta laginaren desbiderapen estandarra (n − 1).",
+   "es": "Se han medido 10 ejes de Ø10 mm con un calibre (resolución 0,01 mm); los resultados están en la tabla. Calcula la media y la desviación típica muestral (n − 1)."
+  }
+ },
+ {
+  "id": "adapted-pnp-1",
+  "origin": "adapted",
+  "sourceNote": "Ariketa egokitua (datu propioak), 8. ebatzia: p eta np grafikoak datu berberekin ebatzirako (spec §15.1). Enuntziatua zirriborroa.",
+  "review": "review-needed",
+  "difficulty": 2,
+  "dataset": {
+   "kind": "attributes",
+   "chart": "p",
+   "samples": [
+    {
+     "n": 100,
+     "defects": 4
+    },
+    {
+     "n": 100,
+     "defects": 6
+    },
+    {
+     "n": 100,
+     "defects": 3
+    },
+    {
+     "n": 100,
+     "defects": 5
+    },
+    {
+     "n": 100,
+     "defects": 7
+    },
+    {
+     "n": 100,
+     "defects": 2
+    },
+    {
+     "n": 100,
+     "defects": 4
+    },
+    {
+     "n": 100,
+     "defects": 5
+    },
+    {
+     "n": 100,
+     "defects": 3
+    },
+    {
+     "n": 100,
+     "defects": 6
+    },
+    {
+     "n": 100,
+     "defects": 14
+    },
+    {
+     "n": 100,
+     "defects": 4
+    },
+    {
+     "n": 100,
+     "defects": 5
+    },
+    {
+     "n": 100,
+     "defects": 3
+    },
+    {
+     "n": 100,
+     "defects": 6
+    },
+    {
+     "n": 100,
+     "defects": 4
+    },
+    {
+     "n": 100,
+     "defects": 5
+    },
+    {
+     "n": 100,
+     "defects": 2
+    },
+    {
+     "n": 100,
+     "defects": 4
+    },
+    {
+     "n": 100,
+     "defects": 6
+    }
+   ]
+  },
+  "rules": {
+   "sd": "s"
+  },
+  "asks": [
+   {
+    "id": "lp",
+    "type": "controlLimits",
+    "chart": "p"
+   },
+   {
+    "id": "lnp",
+    "type": "controlLimits",
+    "chart": "np"
+   },
+   {
+    "id": "oc",
+    "type": "outOfControl",
+    "chart": "p"
+   }
+  ],
+  "weights": {
+   "lp": 4,
+   "lnp": 3,
+   "oc": 3
+  },
+  "text": {
+   "eu": "Torlojuen lerro batean 20 lagin ikuskatu dira, bakoitza 100 unitatekoa, eta unitate akastunak zenbatu dira (taula). Kalkulatu p grafikoaren eta np grafikoaren erdiko lerroa eta kontrol-mugak (LCL negatiboa bada, 0), eta adierazi zein lagin dauden kontrolaz kanpo.",
+   "es": "En una línea de tornillos se han inspeccionado 20 muestras de 100 unidades y se han contado las unidades defectuosas (tabla). Calcula la línea central y los límites de control de los gráficos p y np (si el LCI sale negativo, 0) e indica qué muestras están fuera de control."
+  }
+ },
+ {
+  "id": "adapted-c-1",
+  "origin": "adapted",
+  "sourceNote": "Ariketa egokitua (datu propioak), 9. ebatzia: c grafikoa ebatzirako (spec §15.1). Enuntziatua zirriborroa.",
+  "review": "review-needed",
+  "difficulty": 2,
+  "dataset": {
+   "kind": "attributes",
+   "chart": "c",
+   "samples": [
+    {
+     "n": 1,
+     "defects": 3
+    },
+    {
+     "n": 1,
+     "defects": 5
+    },
+    {
+     "n": 1,
+     "defects": 2
+    },
+    {
+     "n": 1,
+     "defects": 4
+    },
+    {
+     "n": 1,
+     "defects": 6
+    },
+    {
+     "n": 1,
+     "defects": 3
+    },
+    {
+     "n": 1,
+     "defects": 2
+    },
+    {
+     "n": 1,
+     "defects": 5
+    },
+    {
+     "n": 1,
+     "defects": 4
+    },
+    {
+     "n": 1,
+     "defects": 3
+    },
+    {
+     "n": 1,
+     "defects": 12
+    },
+    {
+     "n": 1,
+     "defects": 4
+    },
+    {
+     "n": 1,
+     "defects": 3
+    },
+    {
+     "n": 1,
+     "defects": 2
+    },
+    {
+     "n": 1,
+     "defects": 5
+    },
+    {
+     "n": 1,
+     "defects": 4
+    },
+    {
+     "n": 1,
+     "defects": 3
+    },
+    {
+     "n": 1,
+     "defects": 6
+    },
+    {
+     "n": 1,
+     "defects": 2
+    },
+    {
+     "n": 1,
+     "defects": 4
+    }
+   ]
+  },
+  "rules": {
+   "sd": "s"
+  },
+  "asks": [
+   {
+    "id": "lc",
+    "type": "controlLimits",
+    "chart": "c"
+   },
+   {
+    "id": "oc",
+    "type": "outOfControl",
+    "chart": "c"
+   }
+  ],
+  "weights": {
+   "lc": 6,
+   "oc": 4
+  },
+  "text": {
+   "eu": "Galdaketa-pieza bakoitzean azaleko akatsak zenbatu dira (porositateak, inklusioak...); 20 pieza ikuskatu dira (taula). Kalkulatu c grafikoaren erdiko lerroa eta kontrol-mugak (LCL negatiboa bada, 0), eta adierazi zein pieza dauden kontrolaz kanpo.",
+   "es": "En cada pieza de fundición se han contado los defectos superficiales (porosidades, inclusiones...); se han inspeccionado 20 piezas (tabla). Calcula la línea central y los límites de control del gráfico c (si el LCI sale negativo, 0) e indica qué piezas están fuera de control."
+  }
+ },
+ {
   "id": "freqTable-1-1",
   "origin": "generated",
   "seed": 1,
@@ -1150,6 +1432,249 @@
   "text": {
    "eu": "Fabrikazio-prozesu bateko galerak kausaka kuantifikatu dira (taula, € — A: Ertzaren higadura; B: Erreminta-aldaketaren denbora; C: Programatu gabeko geldialdiak; D: Hozgarriaren falta; E: Plano okerrak; F: Isuri hidraulikoak). Egin Pareto analisia: ordenatu kausak, kalkulatu ehuneko metatua eta adierazi A klaseko kausak (% 80a lortu edo gainditzen den kausaraino, hori barne).",
    "es": "Se han cuantificado por causas las pérdidas de un proceso de fabricación (tabla, € — A: Desgaste del filo; B: Tiempo de cambio de herramienta; C: Paradas no programadas; D: Falta de refrigerante; E: Errores en los planos; F: Fugas hidráulicas). Realiza el análisis de Pareto: ordena las causas, calcula el porcentaje acumulado e indica las causas de clase A (hasta la causa con la que se alcanza o supera el 80 %, incluida)."
+  }
+ },
+ {
+  "id": "xbarR-3-7",
+  "origin": "generated",
+  "seed": 7,
+  "review": "review-needed",
+  "difficulty": 3,
+  "dataset": {
+   "kind": "subgroups",
+   "unit": "mm",
+   "groups": [
+    [
+     "40.001",
+     "40.007",
+     "40",
+     "39.996",
+     "40.006",
+     "40.008"
+    ],
+    [
+     "39.997",
+     "40.001",
+     "39.995",
+     "40.008",
+     "39.993",
+     "39.999"
+    ],
+    [
+     "40.009",
+     "40",
+     "40.007",
+     "39.995",
+     "40.007",
+     "40.008"
+    ],
+    [
+     "39.999",
+     "40.01",
+     "40.001",
+     "39.996",
+     "40.011",
+     "39.995"
+    ],
+    [
+     "39.997",
+     "39.997",
+     "40.005",
+     "40",
+     "40.005",
+     "39.999"
+    ],
+    [
+     "40.004",
+     "40.002",
+     "39.995",
+     "40.008",
+     "40.007",
+     "40.002"
+    ],
+    [
+     "40.002",
+     "39.99",
+     "39.995",
+     "40.004",
+     "40.007",
+     "39.999"
+    ],
+    [
+     "39.991",
+     "39.989",
+     "39.988",
+     "39.999",
+     "40",
+     "40"
+    ],
+    [
+     "40",
+     "40.003",
+     "39.995",
+     "39.994",
+     "40.008",
+     "40.003"
+    ],
+    [
+     "40.005",
+     "39.999",
+     "40.004",
+     "39.996",
+     "40.005",
+     "39.999"
+    ],
+    [
+     "39.991",
+     "39.999",
+     "40.005",
+     "39.998",
+     "40.002",
+     "40"
+    ],
+    [
+     "40.006",
+     "40",
+     "40",
+     "40.001",
+     "40.004",
+     "40.001"
+    ],
+    [
+     "39.998",
+     "40.006",
+     "39.997",
+     "40",
+     "40.005",
+     "40"
+    ],
+    [
+     "40.015",
+     "40.008",
+     "40.009",
+     "40.008",
+     "40.009",
+     "40.012"
+    ],
+    [
+     "40.002",
+     "40.009",
+     "40.016",
+     "40.003",
+     "40.002",
+     "40"
+    ],
+    [
+     "40.006",
+     "40.001",
+     "39.997",
+     "39.998",
+     "40.005",
+     "40.001"
+    ],
+    [
+     "40.009",
+     "40",
+     "40.003",
+     "39.997",
+     "40.003",
+     "39.997"
+    ],
+    [
+     "40.011",
+     "40.001",
+     "39.996",
+     "39.999",
+     "39.993",
+     "40.007"
+    ],
+    [
+     "40.004",
+     "39.993",
+     "40.001",
+     "39.998",
+     "40.006",
+     "40.001"
+    ],
+    [
+     "40.001",
+     "39.996",
+     "39.999",
+     "40.001",
+     "39.994",
+     "39.997"
+    ],
+    [
+     "40.003",
+     "39.998",
+     "39.992",
+     "39.998",
+     "39.995",
+     "40"
+    ],
+    [
+     "40.001",
+     "40.01",
+     "39.995",
+     "40.002",
+     "40.01",
+     "40.001"
+    ],
+    [
+     "40.01",
+     "40.002",
+     "40.009",
+     "39.994",
+     "40.002",
+     "40.001"
+    ],
+    [
+     "39.993",
+     "40.006",
+     "40",
+     "39.995",
+     "39.996",
+     "40.006"
+    ],
+    [
+     "40",
+     "39.998",
+     "39.998",
+     "40",
+     "39.998",
+     "40.003"
+    ]
+   ]
+  },
+  "rules": {
+   "sd": "s",
+   "sigmaHat": "sbar/c4"
+  },
+  "asks": [
+   {
+    "id": "lx",
+    "type": "controlLimits",
+    "chart": "xbar"
+   },
+   {
+    "id": "l2",
+    "type": "controlLimits",
+    "chart": "s"
+   },
+   {
+    "id": "oc",
+    "type": "outOfControl",
+    "chart": "xbar"
+   }
+  ],
+  "weights": {
+   "lx": 4,
+   "l2": 3,
+   "oc": 3
+  },
+  "text": {
+   "eu": "Diametro bat kontrolatzeko 25 azpitalde hartu dira, bakoitza 6 piezakoa (taula, mm-tan). Kalkulatu X̄-s kontrol-grafikoen erdiko lerroa eta kontrol-mugak (taulako konstanteekin), eta adierazi zein azpitalde dauden kontrolaz kanpo X̄ grafikoan (puntu bat mugetatik kanpo).",
+   "es": "Para controlar un diámetro se han tomado 25 subgrupos de 6 piezas (tabla, en mm). Calcula la línea central y los límites de control de los gráficos X̄-s (con las constantes de la tabla) e indica qué subgrupos están fuera de control en el gráfico X̄ (un punto fuera de los límites)."
   }
  }
 ]

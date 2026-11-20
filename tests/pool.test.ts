@@ -16,11 +16,14 @@ const PIN_SEED = 1;
 
 const ope: Exercise[] = (JSON.parse(readFileSync(OPE_FILE, 'utf8')) as unknown[]).map(exerciseFromJSON);
 
+/** Extra pinned generated exercises used by worked exercises (spec §15.3). */
+const EXTRA_PINS: { t: TemplateId; lv: 1 | 2 | 3; seed: number }[] = [{ t: 'xbarR', lv: 3, seed: 7 }];
+
 function buildPool(): unknown[] {
-  const pinned = TEMPLATES.map((t) => {
-    const ex = generate(t, PIN_SEED, LEVELS[t][0]).exercise;
-    return exerciseToJSON({ ...ex, review: 'review-needed' });
-  });
+  const pinned = [
+    ...TEMPLATES.map((t) => generate(t, PIN_SEED, LEVELS[t][0]).exercise),
+    ...EXTRA_PINS.map((p) => generate(p.t, p.seed, p.lv).exercise),
+  ].map((ex) => exerciseToJSON({ ...ex, review: 'review-needed' }));
   return [...ope.map(exerciseToJSON), ...pinned];
 }
 

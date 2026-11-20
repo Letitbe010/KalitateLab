@@ -1,7 +1,7 @@
 {
   "name": "kalitatelab",
   "private": true,
-  "version": "0.5.0",
+  "version": "0.6.0",
   "type": "module",
   "description": "KalitateLab: statistical quality control and process capability exercise trainer for the Basque OPE 1508 (Fabrikazio Mekanikoaren Antolamendua eta Proiektuak)",
   "license": "MIT",

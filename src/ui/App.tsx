@@ -2,17 +2,18 @@ import { useEffect, useState } from 'react';
 import { type Lang, LangContext, translate } from '../i18n';
 import { PracticeExercise } from './PracticeExercise';
 import { PracticeHome } from './PracticeHome';
+import { WorkedItem, WorkedList } from './WorkedView';
 import { type Route, hrefOf, useRoute } from './router';
 import { loadLang, saveLang } from './store';
 
 const NAV: { key: string; route: Route; icon: string; section: string }[] = [
   { key: 'nav.theory', route: { name: 'soon', section: 'teoria' }, icon: 'T', section: 'teoria' },
-  { key: 'nav.worked', route: { name: 'soon', section: 'ebatziak' }, icon: 'E', section: 'ebatziak' },
+  { key: 'nav.worked', route: { name: 'worked' }, icon: 'E', section: 'ebatziak' },
   { key: 'nav.practice', route: { name: 'home' }, icon: 'P', section: 'praktika' },
   { key: 'nav.progress', route: { name: 'soon', section: 'aurrerapena' }, icon: 'A', section: 'aurrerapena' },
 ];
 
-const sectionOf = (r: Route): string => (r.name === 'soon' ? r.section : 'praktika');
+const sectionOf = (r: Route): string => (r.name === 'soon' ? r.section : r.name === 'worked' || r.name === 'workedItem' ? 'ebatziak' : 'praktika');
 const COMMIT = (import.meta.env.VITE_COMMIT as string | undefined)?.slice(0, 7) ?? 'dev';
 
 export function App() {
@@ -49,7 +50,7 @@ export function App() {
               <li key={n.key}>{link(n)}</li>
             ))}
           </ul>
-          <p className="meta">v0.5.0 · {COMMIT}</p>
+          <p className="meta">v0.6.0 · {COMMIT}</p>
         </nav>
         <div className="main">
           <header className="top">
@@ -70,6 +71,8 @@ export function App() {
               <PracticeExercise key={`${route.template}-${route.level}-${route.seed}`} source={{ kind: 'generated', template: route.template, level: route.level, seed: route.seed }} />
             )}
             {route.name === 'pool' && <PracticeExercise key={route.id} source={{ kind: 'pool', id: route.id }} />}
+            {route.name === 'worked' && <WorkedList />}
+            {route.name === 'workedItem' && <WorkedItem key={route.id} id={route.id} />}
             {route.name === 'soon' && (
               <section className="card">
                 <h1>{t(NAV.find((n) => n.section === route.section)!.key)}</h1>

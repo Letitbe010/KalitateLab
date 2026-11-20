@@ -129,9 +129,17 @@ function subgroups(ex: Exercise): Decimal[][] {
   return ex.dataset.groups;
 }
 
-function attributes(ex: Exercise) {
+/**
+ * Attribute chart for an ask. The ask may name the other chart of the p/np pair (same
+ * samples, constant n): p and np are two views of the same data (worked exercise 8).
+ */
+export function attributesFor(ex: Exercise, chart?: Ask['chart']) {
   if (ex.dataset.kind !== 'attributes') throw new Error('This ask needs attribute samples');
-  return attributeChart(ex.dataset.chart, ex.dataset.samples);
+  const ds = ex.dataset;
+  const pair = (c: string) => c === 'p' || c === 'np';
+  const kind = chart && chart !== ds.chart && pair(chart) && pair(ds.chart) ? chart : ds.chart;
+  if (chart && chart !== kind) throw new Error(`Dataset is a ${ds.chart} chart, ask is ${chart}`);
+  return attributeChart(kind as 'p' | 'np' | 'c' | 'u', ds.samples);
 }
 
 export function solveAsk(ex: Exercise, ask: Ask): Expected {
@@ -218,8 +226,7 @@ export function solveAsk(ex: Exercise, ask: Ask): Expected {
         const L = chart === 'R' ? c.R : c.xbar;
         return { kind: 'limits', cl: D.toNumber(L.cl), ucl: D.toNumber(L.ucl), lcl: D.toNumber(L.lcl), lclRaw: D.toNumber(L.lclRaw) };
       }
-      const a = attributes(ex);
-      if (chart && chart !== a.chart) throw new Error(`Dataset is a ${a.chart} chart, ask is ${chart}`);
+      const a = attributesFor(ex, chart);
       const first = a.limits[0]!;
       if (a.limits.some((l) => l.ucl !== first.ucl)) throw new Error('Variable n: limits differ per sample (not a single answer)');
       return { kind: 'limits', cl: first.cl, ucl: first.ucl, lcl: first.lcl, lclRaw: first.lclRaw };
@@ -235,7 +242,7 @@ export function solveAsk(ex: Exercise, ask: Ask): Expected {
         const c = xbarRChart(g);
         return { kind: 'set', value: chart === 'R' ? c.outR : c.outXbar };
       }
-      return { kind: 'set', value: attributes(ex).out };
+      return { kind: 'set', value: attributesFor(ex, chart).out };
     }
     case 'pareto': {
       if (ds.kind !== 'pareto') throw new Error('pareto needs a pareto dataset');
