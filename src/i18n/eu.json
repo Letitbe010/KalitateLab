@@ -241,5 +241,13 @@
   "wk.careful.outOfControl": "Kontrolaz kanpo egotea ez da tolerantziatik kanpo egotea: kontrol-mugak prozesuarenak dira, ez planoarenak.",
   "wk.why.pareto": "Kausak beherantz ordenatuta, % metatuak erakusten du zein kausa gutxik eragiten duten galeren zatirik handiena (A klasea).",
   "wk.careful.pareto": "Kalkulatu % metatua ordenatutako zerrendarekin, eta begiratu enuntziatuaren A klasearen araua (muga gainditzen duen kausa barne ala ez).",
-  "wk.summary.title": "Emaitzak"
+  "wk.summary.title": "Emaitzak",
+  "th.lead": "Kontzeptuak, zergatiak eta kalkulatzeko metodoa. Adibideetako zenbaki guztiak ebazletik datoz.",
+  "th.ope": "OPE",
+  "th.example": "Adibidea",
+  "th.w.capability": "Gaitasun-simulatzailea: mugitu μ eta σ",
+  "th.w.nvsn1": "n vs n − 1",
+  "th.w.larger": "handiagoa",
+  "th.f.empirical": "68–95–99,73 araua",
+  "wk.toTheory": "Teoria →"
 }

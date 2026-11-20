@@ -1,0 +1,4 @@
+{
+  "_comment": "Review status of each theory topic (spec §14.3): draft until the user reviews it.",
+  "status": { "variability": "draft", "descriptive": "draft", "normal": "draft", "defects": "draft", "specs": "draft", "capability": "draft" }
+}

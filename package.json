@@ -1,7 +1,7 @@
 {
   "name": "kalitatelab",
   "private": true,
-  "version": "0.6.0",
+  "version": "0.7.0",
   "type": "module",
   "description": "KalitateLab: statistical quality control and process capability exercise trainer for the Basque OPE 1508 (Fabrikazio Mekanikoaren Antolamendua eta Proiektuak)",
   "license": "MIT",
@@ -17,6 +17,8 @@
     "oracle:py": "python tools/oracle/oracle.py tools/oracle/out/oracle.json tests/golden/golden.json"
   },
   "dependencies": {
+    "@types/katex": "^0.16.7",
+    "katex": "^0.16.11",
     "react": "18.3.1",
     "react-dom": "18.3.1"
   },

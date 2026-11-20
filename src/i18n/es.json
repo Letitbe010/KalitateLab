@@ -241,5 +241,13 @@
   "wk.careful.outOfControl": "Estar fuera de control no es estar fuera de tolerancia: los límites de control son del proceso, no del plano.",
   "wk.why.pareto": "Con las causas ordenadas de mayor a menor, el % acumulado muestra qué pocas causas generan la mayor parte de las pérdidas (clase A).",
   "wk.careful.pareto": "Calcula el % acumulado con la lista ordenada y mira la regla de la clase A del enunciado (incluida o no la causa que supera el umbral).",
-  "wk.summary.title": "Resultados"
+  "wk.summary.title": "Resultados",
+  "th.lead": "Conceptos, porqués y método de cálculo. Todos los números de los ejemplos proceden del solucionador.",
+  "th.ope": "OPE",
+  "th.example": "Ejemplo",
+  "th.w.capability": "Simulador de capacidad: mueve μ y σ",
+  "th.w.nvsn1": "n vs n − 1",
+  "th.w.larger": "mayor",
+  "th.f.empirical": "Regla 68–95–99,73",
+  "wk.toTheory": "Teoría →"
 }

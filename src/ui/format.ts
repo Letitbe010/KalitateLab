@@ -40,3 +40,26 @@ export function fmtDec(x: Decimal): string {
 }
 
 export const pct = (x: number): string => `${fmt(x)} %`;
+
+/** Decimals of a finite decimal (denominator 2^a·5^b → max(a, b)); 6 for other fractions. */
+export function decimalsOf(x: Decimal): number {
+  let d = x.d;
+  let a = 0;
+  let b = 0;
+  while (d % 2n === 0n) {
+    d /= 2n;
+    a++;
+  }
+  while (d % 5n === 0n) {
+    d /= 5n;
+    b++;
+  }
+  return d === 1n ? Math.max(a, b) : 6;
+}
+
+/** Specification limits with a common precision (19,960 next to 19,939, not 19,96). */
+export function specDecimals(...xs: (Decimal | undefined)[]): number {
+  return Math.max(0, ...xs.filter((v): v is Decimal => !!v).map(decimalsOf));
+}
+
+export const fixed = (x: Decimal, k: number): string => D.toFixed(x, k).replace('.', ',').replace('-', '−');

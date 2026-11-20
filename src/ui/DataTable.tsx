@@ -8,23 +8,7 @@ import { useT } from '../i18n';
 import * as D from '../core/decimal';
 import type { Decimal } from '../core/decimal';
 import { dataDecimals } from '../core/solve';
-import { fmtDec } from './format';
-
-/** Decimals of a finite decimal (denominator 2^a·5^b → max(a, b)). */
-function decimalsOf(x: Decimal): number {
-  let d = x.d;
-  let a = 0;
-  let b = 0;
-  while (d % 2n === 0n) {
-    d /= 2n;
-    a++;
-  }
-  while (d % 5n === 0n) {
-    d /= 5n;
-    b++;
-  }
-  return d === 1n ? Math.max(a, b) : 6;
-}
+import { decimalsOf, fmtDec } from './format';
 
 function rowsOf(ex: Exercise, t: (k: string, v?: Record<string, string | number>) => string): { head: string[]; rows: string[][] } {
   const ds = ex.dataset;
